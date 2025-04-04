@@ -1,0 +1,13 @@
+#first_card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carte {
+    max-width: 10rem;
+    margin: 2rem;
+    padding: 2rem;
+    background-color: rgb(45, 45, 143);
+    color: white;
+}

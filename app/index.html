@@ -10,10 +10,13 @@
   <body>
     <header id="header"></header>
 
+    <section id="first_card"></section>
     <section id="content"></section>
 
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
+
+      import { film_card } from "./component/film_card/script.js";
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -28,7 +31,10 @@
 
       C.start = function () {
         V.renderNavBar("C.handlerAbout()");
+        V.renderfilm_card()
       };
+
+      
 
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
@@ -43,6 +49,11 @@
       V.renderNavBar = function (hAbout) {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(hAbout);
+      };
+
+      V.renderfilm_card = function () {
+        let card = document.querySelector("#first_card");
+        card.innerHTML = film_card.format();
       };
 
       C.start(); // Démarre l'application
