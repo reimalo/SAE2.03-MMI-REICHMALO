@@ -24,7 +24,7 @@
 }
 
 
-.carte:nth-child(4n+1) {
+.carte:nth-child(5n+1) {
     margin: 0;
     grid-column: span 2;
     /* Les grandes images occupent 2 colonnes */

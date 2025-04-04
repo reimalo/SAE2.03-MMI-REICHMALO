@@ -10,10 +10,12 @@
   border-color: var(--color-fg);
   border-width: 1px;
   overflow: hidden;
+
   .log__list {
     font-size: smaller;
     color: var(--color-accent);
     overflow-y: scroll;
+
     .last {
       animation: fondu-en-entree 1s ease-in-out;
     }
@@ -28,6 +30,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -37,9 +40,11 @@
   0% {
     opacity: 1;
   }
+
   50% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }

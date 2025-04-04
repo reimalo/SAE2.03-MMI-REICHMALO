@@ -8,14 +8,25 @@
   </head>
   <body>
     <section id="log"></section>
-
+    <section id="form_container"></section>
+    
     <script type="module">
       import { Log } from "./component/Log/script.js";
+      import { NewFilmForm } from "./component/NewFilmForm/script.js";
+      import { DataMovie } from "./data/dataMovie.js";
 
       window.C = {};
 
       C.start = function () {
         V.renderLog("Démarrage de l'application");
+        V.renderNewFilm("C.handleradd()");
+      };
+
+      C.handleradd = async function () {
+        let form = document.querySelector(".addFilm__form");
+        let fd = new FormData(form);
+        let res = await DataMovie.add(fd);
+        V.renderLog(res);
       };
 
       window.V = {};
@@ -23,6 +34,11 @@
       V.renderLog = function (txt) {
         let content = document.querySelector("#log");
         content.innerHTML = Log.format(txt);
+      };
+
+      V.renderNewFilm = function (handler) {
+        let content = document.querySelector("#form_container");
+        content.innerHTML = NewFilmForm.format(handler);
       };
 
       C.start();
