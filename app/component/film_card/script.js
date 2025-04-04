@@ -3,7 +3,7 @@ let template = await templateFile.text();
 
 let film_card = {};
 
-film_card.format = function (hAbout, hHome) {
+film_card.format = function (hHome) {
   let html = template;
   html = html.replace("{{hAbout}}", hAbout);
   return html;
