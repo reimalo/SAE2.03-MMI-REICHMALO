@@ -1,11 +1,11 @@
 let HOST_URL = "https://mmi.unilim.fr/~reich2"
-let DataMenu = {};
+let DataMovie = {};
 
-DataMenu.request = async function (week, day) {
-    let answer = await fetch(HOST_URL + "/SAE2.03-MMI-REICHMALO/server/script.php?todo=read&semaine=" + week + "&jour=" + day);
+DataMovie.request = async function () {
+    let answer = await fetch(HOST_URL + "/SAE2.03-MMI-REICHMALO/server/script.php?todo=read");
     let data = await answer.json();
     return data;
 }
 
 
-export { DataMenu };
+export { DataMovie };

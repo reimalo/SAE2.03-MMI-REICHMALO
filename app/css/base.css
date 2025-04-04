@@ -6,3 +6,4 @@
 
 @import "../component/NavBar/style.css" layer(components);
 @import "../component/film_card/style.css" layer(components);
+@import "./composent_mere.css" layer(components);

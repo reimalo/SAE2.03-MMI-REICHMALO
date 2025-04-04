@@ -10,14 +10,13 @@
   <body>
     <header id="header"></header>
 
-    <section id="first_card"></section>
+    <section id="card__list"></section>
     <section id="content"></section>
 
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
-
       import { film_card } from "./component/film_card/script.js";
-
+      import {DataMovie} from './data/dataMovie.js';
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
       // Une fois l'application terminée, on pourrait remettre let C.
@@ -31,7 +30,6 @@
 
       C.start = function () {
         V.renderNavBar("C.handlerAbout()");
-        V.renderfilm_card()
       };
 
       
@@ -51,13 +49,17 @@
         header.innerHTML = NavBar.format(hAbout);
       };
 
-      V.renderfilm_card = function () {
-        let card = document.querySelector("#first_card");
-        card.innerHTML = film_card.format();
-      };
+      V.renderfilm_card = function (data) {
+          let card = document.querySelector("#card__list");
+          card.innerHTML += film_card.format(data);
+        };
+      
+      let datafilm = await DataMovie.request();
+      datafilm.forEach((film) => {
+        V.renderfilm_card(film); 
+      });
 
       C.start(); // Démarre l'application
     </script>
   </body>
 </html>
-<script type="module"></script>
