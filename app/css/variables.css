@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700&display=swap");
 
+@font-face {
+  font-family: 'Minigap';
+  src: url('../../assets/font/Minigap.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   /* Primitive Tokens */
   --color-black: hsl(253, 69%, 8%);
@@ -8,7 +15,12 @@
   --color-gray: hsl(0, 0%, 50%);
   --color-gray-dark: hsl(0, 0%, 20%);
   --color-blue-1: rgb(45, 45, 143);
+  --color-ban-1: rgb(57, 40, 158);
+  --color-fond-1: rgb(44, 61, 110);
+  --color-fond-carte: rgb(3, 14, 45);
   --ff-sans: "DM sans", sans-serif;
+  --ff-Minigap: "Minigap", sans-serif;
+
 
   /* Sementic Tokens */
   --color-fg: var(--color-white);

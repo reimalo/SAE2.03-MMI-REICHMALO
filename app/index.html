@@ -5,11 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/base.css" />
-  </head>
+  </head> 
 
   <body>
     <header id="header"></header>
-
+    
     <section id="card__list"></section>
     <section id="content"></section>
 
@@ -46,7 +46,7 @@
        */
       V.renderNavBar = function (hAbout) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout);
+        header.innerHTML = NavBar.format();
       };
 
       V.renderfilm_card = function (data) {

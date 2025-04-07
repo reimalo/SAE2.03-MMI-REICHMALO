@@ -7,6 +7,7 @@ film_card.format = function (film) {
   let html = template;
   html = html.replace("{{chemin}}", "../server/images/" + film.image);
   html = html.replace("{{titre}}", film.name);
+  html = html.replace("{{description}}", film.description);
   return html;
 };
 

@@ -1,39 +1,188 @@
 #card__list {
     padding-top: 2rem;
     display: grid;
-    background-color: rgb(28, 28, 58);
-    grid-template-columns: repeat(2, 1fr);
+    background-color: var(--color-fond-1);
+    grid-template-columns: repeat(2, 45.5%);
     /* 2 colonnes */
-    grid-auto-rows: 25rem;
+    grid-auto-rows: 20rem;
     /* Hauteur des lignes */
     grid-gap: 2rem;
     /* Espacement entre les éléments */
+
 }
 
 .carte {
-
-    background-color: var(--color-blue-1);
-    color: white;
-    margin: 1rem;
+    background-color: var(--color-ban-1);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     text-align: center;
-    font-size: 1rem;
+    border: solid 1px var(--color-gray);
+    border-radius: 0.5rem;
+    color: white;
+    font-size: 0.8rem;
+    font-family: var(--ff-Minigap);
+
+
 }
 
+.description_card {
+    display: none;
+}
+
+.titre_span {
+    display: none;
+}
 
 .carte:nth-child(5n+1) {
+    position: relative;
     margin: 0;
     grid-column: span 2;
-    /* Les grandes images occupent 2 colonnes */
     grid-row: span 2;
-    /* Et 2 lignes */
+    border-block: solid 2px var(--color-white);
+    border-radius: 0;
+
+}
+
+.carte:nth-child(5n+1) .titre_card {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-block: solid 2px var(--color-white);
+    color: white;
+    padding-block: 1rem;
+    text-align: center;
+}
+
+.carte:nth-child(5n+1) .cart__img {
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    padding: 0;
 }
 
 .cart__img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+
+
+@media (min-width: 768px) {
+    #card__list {
+        padding-top: 2rem;
+        padding-inline: 2rem;
+        display: grid;
+        background-color: var(--color-fond-1);
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 20rem;
+        grid-gap: 2rem;
+
+    }
+
+    .carte {
+        background-color: var(--color-fond-carte);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border: solid 1px var(--color-gray);
+        border-radius: 0.5rem;
+        color: white;
+        font-size: 0.8rem;
+        font-family: var(--ff-Minigap);
+        transition: all 0.3s ease-in-out;
+
+
+    }
+
+
+    .carte:nth-child(5n+1) {
+        flex-direction: column;
+        position: relative;
+        margin: 0;
+        grid-column: span 1;
+        grid-row: span 2;
+        border: 2px solid var(--color-white);
+        border-radius: 0;
+
+    }
+
+
+    .carte:nth-child(5n+1) .titre_card {
+        position: absolute;
+        margin-left: 0;
+        bottom: 8rem;
+        left: 0;
+    }
+
+
+    .carte:nth-child(5n+1) .description_card {
+        display: block;
+        text-align: start;
+        justify-self: flex-end;
+        padding: 1rem;
+    }
+
+    .description_title {
+        text-align: start;
+        font-size: 1.5rem;
+    }
+
+
+    .carte:nth-child(5n+1) .cart__img {
+        width: 100%;
+    }
+
+    .cart__img {
+        box-sizing: border-box;
+        height: 100%;
+        object-fit: cover;
+        width: 60%;
+        border-radius: 0.5rem;
+        padding: 0;
+    }
+
+    .carte {
+        display: flex;
+        flex-direction: row;
+        text-align: start;
+        align-items: start;
+    }
+
+    .titre_card {
+        margin-left: 1rem;
+    }
+
+    .titre_span {
+        display: block;
+        font-size: 1.5rem;
+    }
+
+    .carte:nth-child(5n+1) .titre_span {
+        display: none;
+    }
+
+    .description_card {
+        display: block;
+        margin-inline: 1rem;
+    }
+
+    .description_title {
+        display: none;
+    }
+
+    .carte:nth-child(5n+1) .description_title {
+        display: block;
+    }
+}
+
+
+.carte:hover {
+    transform: scale(1.05);
+    background-color: var(--color-blue-1);
+    transition: all 0.3s ease-in-out;
 }
