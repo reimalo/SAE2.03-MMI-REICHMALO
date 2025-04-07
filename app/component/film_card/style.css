@@ -1,5 +1,5 @@
 #card__list {
-    padding-top: 2rem;
+    padding-block: 2rem;
     display: grid;
     background-color: var(--color-fond-1);
     grid-template-columns: repeat(2, 45.5%);

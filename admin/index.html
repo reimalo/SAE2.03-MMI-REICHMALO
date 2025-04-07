@@ -7,39 +7,67 @@
     <link rel="stylesheet" href="./css/base.css" />
   </head>
   <body>
-    <section id="log"></section>
-    <section id="form_container"></section>
-    
+    <div class="content">
+      <header id="header"></header>
+      <div class="fonction_selector">
+        <div class="menu">
+          <ul class="menu__list">
+            <li class="menu__item">Film</li>
+          </ul>
+        </div>
+        <section id="form_container"></section>
+      </div>
+      <div id="popup-container"></div>
+    </div>
+
     <script type="module">
-      import { Log } from "./component/Log/script.js";
+      import { NavBar } from "./component/NavBar/script.js";
       import { NewFilmForm } from "./component/NewFilmForm/script.js";
       import { DataMovie } from "./data/dataMovie.js";
 
       window.C = {};
 
       C.start = function () {
-        V.renderLog("Démarrage de l'application");
+        showPopup("Démarrage de l'application");
         V.renderNewFilm("C.handleradd()");
+        V.renderNavBar();
       };
 
       C.handleradd = async function () {
         let form = document.querySelector(".addFilm__form");
         let fd = new FormData(form);
         let res = await DataMovie.add(fd);
-        V.renderLog(res);
+        showPopup(res); // Affiche le résultat dans un pop-up
       };
 
       window.V = {};
-
-      V.renderLog = function (txt) {
-        let content = document.querySelector("#log");
-        content.innerHTML = Log.format(txt);
-      };
 
       V.renderNewFilm = function (handler) {
         let content = document.querySelector("#form_container");
         content.innerHTML = NewFilmForm.format(handler);
       };
+
+      V.renderNavBar = function () {
+        let header = document.querySelector("#header");
+        header.innerHTML = NavBar.format();
+      };
+
+      function showPopup(message) {
+        const popupContainer = document.getElementById("popup-container");
+
+        // Crée un élément pop-up
+        const popup = document.createElement("div");
+        popup.className = "popup";
+        popup.textContent = message;
+
+        // Ajoute le pop-up au conteneur
+        popupContainer.appendChild(popup);
+
+        // Supprime le pop-up après 5 secondes
+        setTimeout(() => {
+          popup.remove();
+        }, 5000);
+      }
 
       C.start();
     </script>

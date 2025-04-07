@@ -9,7 +9,6 @@
 
   <body>
     <header id="header"></header>
-    
     <section id="card__list"></section>
     <section id="content"></section>
 
@@ -29,7 +28,7 @@
       };
 
       C.start = function () {
-        V.renderNavBar("C.handlerAbout()");
+        V.renderNavBar();
       };
 
       
@@ -44,7 +43,7 @@
        * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
        * formaté par le composant NavBar.
        */
-      V.renderNavBar = function (hAbout) {
+      V.renderNavBar = function () {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format();
       };
