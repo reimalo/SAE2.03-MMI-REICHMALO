@@ -9,6 +9,7 @@
 
   <body>
     <header id="header"></header>
+    <section id="filter_container"></section>
     <section id="card__list"></section>
     <section id="card__info_container"></section>
 
@@ -17,17 +18,36 @@
       import { film_card } from "./component/film_card/script.js";
       import { DataMovie } from "./data/dataMovie.js";
       import { film_info } from "./component/film_info/script.js";
+      import { categorie_selectorForm } from "./component/categorie_selector/script.js";
       window.C = {};
-
-      C.handlerAbout = function () {
-        alert(
-          "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
-        );
-      };
 
       C.start = function () {
         V.renderNavBar();
+        V.renderCategorie_selector("C.handlerCategSelect()");
       };
+
+      C.handlerCategSelect = async function () {
+        let form = document.querySelector(".categorie__form");
+        let fd = new FormData(form);
+        let category = fd.get("categorie");
+        let res = await DataMovie.categorie(category);
+        let card = document.querySelector("#card__list");
+        card.innerHTML = "";
+        let card_info = document.querySelector("#card__info_container");
+        card_info.innerHTML = "";
+        card.style.display = "grid";
+        if (res.length === 0) {
+          card.innerHTML =
+            '<div class="no-results"><img src="../assets/images/Group 4.svg" alt="Aucune donnée disponible" /></div>';
+          card.style.display = "flex";
+          card.style.justifyContent = "center";
+        }
+
+        res.forEach((film) => {
+          V.renderfilm_card(film);
+        });
+      };
+
       window.V = {};
 
       V.renderNavBar = function () {
@@ -40,6 +60,11 @@
         card.innerHTML += film_card.format(data);
       };
 
+      V.renderCategorie_selector = function (handler) {
+        let content = document.querySelector("#filter_container");
+        content.innerHTML = categorie_selectorForm.format(handler);
+      };
+
       let datafilm = await DataMovie.request();
       datafilm.forEach((film) => {
         V.renderfilm_card(film);
@@ -49,18 +74,20 @@
         let info = document.querySelector("#card__info_container");
 
         let card_list_sup = document.querySelector("#card__list");
+        let categorieSelector = document.querySelector(".categorie_selector");
         card_list_sup.innerHTML = "";
+        categorieSelector.style.display = "none";
         card_list_sup.style.padding = "0";
-        info.innerHTML = film_info.format(data); // Remplace le contenu de card__list
+        info.innerHTML = film_info.format(data);
       };
 
       document.querySelector("#card__list");
       document.addEventListener("click", async (event) => {
         let target = event.target.closest(".carte");
         if (target) {
-          let filmId = target.getAttribute("id"); // Récupère l'id de la carte cliquée
-          let info_film = await DataMovie.info(filmId); // Utilise l'id comme paramètre
-          V.renderInfo_film(info_film); // Affiche les informations du film
+          let filmId = target.getAttribute("id");
+          let info_film = await DataMovie.info(filmId);
+          V.renderInfo_film(info_film);
         }
       });
 

@@ -13,5 +13,10 @@ DataMovie.info = async function (num_card) {
     return data;
 }
 
+DataMovie.categorie = async function (category) {
+    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=categorie_selection&category=${category}`);
+    let data = await answer.json();
+    return data;
+}
 
 export { DataMovie };

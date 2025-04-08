@@ -7,4 +7,5 @@
 @import "../component/NavBar/style.css" layer(components);
 @import "../component/film_card/style.css" layer(components);
 @import "../component/film_info/style.css" layer(components);
+@import "../component/categorie_selector/style.css" layer(components);
 @import "./composent_mere.css" layer(components);

@@ -75,3 +75,13 @@ function infoController(){
     return $film;
 
 }
+
+function categorie_selectionController(){
+    $category_name = $_REQUEST['category'];
+    if ($category_name === "none") {
+        $categories = getAllFilm();
+    } else {
+        $categories = getFilmCategorie($category_name);
+    }
+    return $categories;
+}

@@ -91,3 +91,34 @@ function getFilm($id) {
         $res = $stmt->fetch(PDO::FETCH_OBJ);
         return $res;
 }
+
+
+function getFilmCategorie($name_category) {
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+
+    $sqlCategory = "SELECT id FROM Category WHERE name = :name";
+    $stmtCategory = $cnx->prepare($sqlCategory);
+    $stmtCategory->bindParam(':name', $name_category, PDO::PARAM_STR);
+    $stmtCategory->execute();
+    $category = $stmtCategory->fetch(PDO::FETCH_ASSOC);
+    $id_category = $category['id'];
+    $sql = "SELECT 
+                Movie.id, 
+                Movie.name, 
+                Movie.year, 
+                Movie.length, 
+                Movie.description, 
+                Movie.director, 
+                Movie.image, 
+                Movie.trailer, 
+                Movie.min_age 
+            FROM Movie 
+            WHERE id_category = :id_category";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_category', $id_category, PDO::PARAM_INT);
+    $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+    return $res; // Retourne les films correspondant à la catégorie
+}

@@ -1,0 +1,75 @@
+.categorie_selector {
+    display: flex;
+    background-color: var(--color-fond-1);
+    padding-top: 1rem;
+    padding-left: 1rem;
+}
+
+.categorie__form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem; /* Espacement entre les éléments */
+}
+
+/* Sélecteur */
+.categorie__form select {
+    background-color: rgba(255, 255, 255, 0.1); /* Fond semi-transparent */
+    color: #ffffff; /* Texte blanc */
+    font-size: 1rem;
+    padding: 0.8rem;
+    border: 0;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Focus sur le sélecteur */
+.categorie__form select:focus {
+    border-color: #00bfff; /* Bordure bleue au focus */
+    box-shadow: 0 0 8px rgba(0, 191, 255, 0.5); /* Effet lumineux */
+    outline: none;
+    color: black;
+}
+
+/* Bouton */
+.categorie__form input[type="button"] {
+    background-color: #00bfff; /* Couleur bleue */
+    color: #ffffff; /* Texte blanc */
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+/* Effet au survol du bouton */
+.categorie__form input[type="button"]:hover {
+    background-color: #008fcc; /* Couleur plus foncée au survol */
+    transform: scale(1.05); /* Légère mise en avant */
+}
+
+/* Effet au clic du bouton */
+.categorie__form input[type="button"]:active {
+    transform: scale(0.95); /* Légère réduction au clic */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .categorie_selector {
+        padding: 1rem;
+    }
+
+    .categorie__form {
+        flex-direction: column; /* Les éléments passent en colonne */
+        gap: 0.8rem;
+    }
+
+    .categorie__form select,
+    .categorie__form input[type="button"] {
+        width: 100%; /* Les éléments occupent toute la largeur */
+    }
+}
