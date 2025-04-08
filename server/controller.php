@@ -85,3 +85,35 @@ function categorie_selectionController(){
     }
     return $categories;
 }
+
+
+function add_profilController() {
+    if (empty($_REQUEST['Nom'])) {
+        return "Erreur : Le Nom est obligatoire.";
+    }
+    if (empty($_REQUEST['Age']) || !is_numeric($_REQUEST['Age'])) {
+        return "Erreur : L'age est obligatoire et doit être un nombre.";
+    }
+    $file = null;
+    if (isset($_FILES['file']) && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
+        $tmp_name = $_FILES['file']['tmp_name'];
+        $filename = basename($_FILES['file']['name']);
+        $upload_dir = "./images/";
+
+        if (move_uploaded_file($tmp_name, $upload_dir . $filename)) {
+            $file = $filename;
+        } else {
+            return "Erreur lors de l'enregistrement de l'image.";
+        }
+    }
+
+    $Nom = $_REQUEST['Nom'];
+    $Age = $_REQUEST['Age'];
+
+    $ok = addProfil($Nom, $Age, $file);
+    if ($ok != 0) {
+        return "Le profil $Nom à été ajouté";
+    } else {
+        return "Erreur, le profil n'a pas été ajouté";
+    }
+}

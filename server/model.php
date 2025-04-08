@@ -122,3 +122,25 @@ function getFilmCategorie($name_category) {
 
     return $res; // Retourne les films correspondant à la catégorie
 }
+
+
+
+function addProfil($Nom, $Age, $file) {
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+
+    // Requête SQL d'insertion du profil
+    $sql = "INSERT INTO Profil (name, age, image) VALUES (:name, :age, :image)";
+    $stmt = $cnx->prepare($sql);
+
+    // Lie les paramètres
+    $stmt->bindParam(':name', $Nom, PDO::PARAM_STR);
+    $stmt->bindParam(':age', $Age, PDO::PARAM_INT);
+    $stmt->bindParam(':image', $file, PDO::PARAM_STR);
+
+    // Exécute la requête SQL
+    $stmt->execute();
+
+    // Retourne le nombre de lignes affectées
+    return $stmt->rowCount();
+}

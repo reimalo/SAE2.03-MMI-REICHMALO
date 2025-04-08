@@ -7,4 +7,5 @@
 @import "../component/NavBar/style.css" layer(components);
 @import "../component/pop-up/style.css" layer(components);
 @import "../component/NewFilmForm/style.css" layer(components);
+@import "../component/NewProfilForm/style.css" layer(components);
 @import "./composent_mere.css" layer(components);

@@ -1,0 +1,29 @@
+<div class="addProfil">
+  <h4 class="addProfil__title"># Ajouter un Profil</h4>
+  <form class="addProfil__form">
+    <input
+      required
+      type="text"
+      name="Nom"
+      placeholder="nom du profil"
+      pattern="[^0-9]*"
+      title="Numbers are not allowed"
+    />
+    <input
+      required
+      type="text"
+      name="Age"
+      placeholder="Age du profil"
+      pattern="[^0-9]*"
+      title="Numbers are not allowed"
+    />
+    <input
+      required
+      type="file"
+      name="file"
+      accept=".jpg,.jpeg,.png,.gif"
+      title="Please upload an image file"
+    />
+    <input onclick="{{handler}}" type="button" value="add" name="todo" />
+  </form>
+</div>
