@@ -64,6 +64,13 @@
         }
       });
 
+      document.addEventListener("click", (event) => {
+        let closeButton = event.target.closest(".info__close_btn");
+        if (closeButton) {
+          location.reload();
+        }
+      });
+
       C.start(); // Démarre l'application
     </script>
   </body>
