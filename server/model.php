@@ -68,3 +68,26 @@ function addFilm($Titre, $Réalisateur, $Année, $Durée, $Description, $categor
     }
     return 0; // Catégorie non trouvée, rien ajouté
 }
+
+function getFilm($id) {
+        $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+        $sql = "SELECT 
+                    Movie.id, 
+                    Movie.name, 
+                    Movie.year, 
+                    Movie.length, 
+                    Movie.description, 
+                    Movie.director, 
+                    Movie.image, 
+                    Movie.trailer, 
+                    Movie.min_age, 
+                    Category.name AS category
+                FROM Movie 
+                JOIN Category ON Movie.id_category = Category.id 
+                WHERE Movie.id = :id";
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return $res;
+}

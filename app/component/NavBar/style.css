@@ -18,6 +18,9 @@
   font-size: 0.7rem;
 }
 
+.navbar__citation{
+  margin-left: 1rem;
+}
 
 @media (min-width: 768px) {
   .navbar {
@@ -36,5 +39,6 @@
     right: 2rem;
     font-family: var(--ff-Minigap);
     font-size: 1.5rem;
+    margin: 0;
   }
 }

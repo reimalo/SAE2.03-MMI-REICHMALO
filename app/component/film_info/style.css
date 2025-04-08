@@ -1,0 +1,47 @@
+
+
+.film_info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-family: var(--ff-Minigap);
+  color: var(--color-white);
+}
+
+.info__img {
+    width: 45vh;
+}
+
+.info__video{
+    width: 45vh;
+    height: 50vh;
+}
+
+@media (min-width: 768px) {
+    .film_info {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        font-family: var(--ff-Minigap);
+        color: var(--color-white);
+      }
+      
+      .info__img {
+          width: 45vh;
+      }
+      
+      .info__video {
+          width: 50vh;
+      }
+      
+      .info__video{
+          width: 120vh;
+          height: 50vh;
+      }
+}

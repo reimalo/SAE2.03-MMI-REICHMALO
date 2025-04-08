@@ -7,5 +7,11 @@ DataMovie.request = async function () {
     return data;
 }
 
+DataMovie.info = async function (num_card) {
+    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=info&num_carte=${num_card}`);
+    let data = await answer.json();
+    return data;
+}
+
 
 export { DataMovie };

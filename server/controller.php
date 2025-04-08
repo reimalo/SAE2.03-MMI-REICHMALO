@@ -65,3 +65,13 @@ function addController() {
         return "Erreur, le film n'a pas été ajouté";
     }
 }
+
+function infoController(){
+    if (empty($_REQUEST['num_carte'])) {
+        return "Erreur : L'id du film est obligatoire.";
+    }
+    $id = $_REQUEST['num_carte'];
+    $film = getFilm($id);
+    return $film;
+
+}

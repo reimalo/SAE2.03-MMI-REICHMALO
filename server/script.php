@@ -58,6 +58,10 @@ if ( isset($_REQUEST['todo']) ){
     case 'add':
       $data = addController();
       break;
+    
+    case 'info':
+      $data = infoController();
+      break;
 
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée
       echo json_encode('[error] Unknown todo value');
