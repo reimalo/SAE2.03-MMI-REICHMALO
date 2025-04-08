@@ -32,6 +32,7 @@ body {
 }
 
 .menu__item {
+    z-index: 1000;
     background: linear-gradient(135deg, #1a1aff, #4b00e0); /* dégradé bleu/violet */
     color: white;
     padding: 1rem 2rem;
