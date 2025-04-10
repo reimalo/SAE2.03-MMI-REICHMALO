@@ -68,6 +68,7 @@
     padding-block: 0rem;
     color: var(--color-fg);
     background-color: var(--color-ban-1);
+    pointer-events: none; /* permet de désactiver les effet de cet élément lors du clic (ici cela sert pour le profil de la navbar)*/
 }
 
 .img_profil-sel--navbar{
