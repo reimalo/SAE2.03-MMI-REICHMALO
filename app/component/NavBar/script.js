@@ -11,6 +11,7 @@ NavBar.format = function (profil) {
     html = html.replace("{{name}}", profil.name);
     html = html.replace("{{Age}}", profil.age);
     html = html.replace("{{id}}", profil.id);
+    html = html.replace("{{Age_id}}", profil.age);
     html = html.replace("navbar__item--invisible", "navbar__item--visible"); // Profil visible
   } else {
     html = html.replace("navbar__item--visible", "navbar__item--invisible"); // Profil caché

@@ -18,19 +18,19 @@ define("DBNAME", "reich2");
 define("DBLOGIN", "reich2");
 define("DBPWD", "reich2");
 
-function getAllFilm(){
-    // Connexion à la base de données
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    // Requête SQL pour récupérer le menu avec des paramètres
-    $sql = "SELECT * FROM Movie";
-    // Prépare la requête SQL
+function getAllFilm($Age) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT * FROM Movie WHERE min_age <= :age";
     $stmt = $cnx->prepare($sql);
-    // Exécute la requête SQL
+    $stmt->bindParam(':age', $Age, PDO::PARAM_INT);
     $stmt->execute();
-    // Récupère les résultats de la requête sous forme d'objets
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-    return $res; // Retourne les résultats
+
+    return $res; 
 }
+
+
+
 
 function addFilm($Titre, $Réalisateur, $Année, $Durée, $Description, $categorie, $file, $URL, $Restrictions) {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD); 
@@ -93,34 +93,24 @@ function getFilm($id) {
 }
 
 
-function getFilmCategorie($name_category) {
-    // Connexion à la base de données
+function getFilmCategorie($name_category, $age) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-
     $sqlCategory = "SELECT id FROM Category WHERE name = :name";
     $stmtCategory = $cnx->prepare($sqlCategory);
     $stmtCategory->bindParam(':name', $name_category, PDO::PARAM_STR);
     $stmtCategory->execute();
     $category = $stmtCategory->fetch(PDO::FETCH_ASSOC);
     $id_category = $category['id'];
-    $sql = "SELECT 
-                Movie.id, 
-                Movie.name, 
-                Movie.year, 
-                Movie.length, 
-                Movie.description, 
-                Movie.director, 
-                Movie.image, 
-                Movie.trailer, 
-                Movie.min_age 
+    $sql = "SELECT *
             FROM Movie 
-            WHERE id_category = :id_category";
+            WHERE id_category = :id_category AND min_age <= :age";
     $stmt = $cnx->prepare($sql);
     $stmt->bindParam(':id_category', $id_category, PDO::PARAM_INT);
+    $stmt->bindParam(':age', $age, PDO::PARAM_INT);
     $stmt->execute();
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-    return $res; // Retourne les films correspondant à la catégorie
+    return $res; // Retourne les films correspondant à la catégorie et à la restriction d'âge
 }
 
 

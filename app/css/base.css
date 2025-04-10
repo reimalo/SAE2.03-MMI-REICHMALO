@@ -10,4 +10,5 @@
 @import "../component/categorie_selector/style.css" layer(components);
 @import "../component/profil_selector_container/style.css" layer(components);
 @import "../component/profil_selector/style.css" layer(components);
+@import "../component/age_filter/style.css" layer(components);
 @import "./composent_mere.css" layer(components);

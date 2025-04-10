@@ -1,8 +1,8 @@
 let HOST_URL = "https://mmi.unilim.fr/~reich2"
 let DataMovie = {};
 
-DataMovie.request = async function () {
-    let answer = await fetch(HOST_URL + "/SAE2.03-MMI-REICHMALO/server/script.php?todo=read");
+DataMovie.request = async function (age) {
+    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=read&age=${age}`);
     let data = await answer.json();
     return data;
 }
@@ -13,8 +13,8 @@ DataMovie.info = async function (num_card) {
     return data;
 }
 
-DataMovie.categorie = async function (category) {
-    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=categorie_selection&category=${category}`);
+DataMovie.categorie = async function (category, age) {
+    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=categorie_selection&category=${category}&age=${age}`);
     let data = await answer.json();
     return data;
 }

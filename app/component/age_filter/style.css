@@ -1,0 +1,12 @@
+.filtre_age{
+    height: 25%;
+    background-color: #fabb0d;
+    font-size: 1rem;
+    padding-block: 0;
+    padding-inline: 0.8rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    font-family: var(--ff-Minigap);
+    color: var(--color-white); 
+    margin-left: 2rem;
+}

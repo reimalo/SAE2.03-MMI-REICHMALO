@@ -3,7 +3,8 @@
 
 require("model.php");
 function readController(){
-    $film_list = getAllFilm();
+    $age = $_REQUEST['age'];
+    $film_list = getAllFilm($age);
     return $film_list;
 }
 
@@ -78,10 +79,11 @@ function infoController(){
 
 function categorie_selectionController(){
     $category_name = $_REQUEST['category'];
+    $age = $_REQUEST['age'];
     if ($category_name === "none") {
         $categories = getAllFilm();
     } else {
-        $categories = getFilmCategorie($category_name);
+        $categories = getFilmCategorie($category_name, $age);
     }
     return $categories;
 }

@@ -22,20 +22,23 @@
       import { categorie_selectorForm } from "./component/categorie_selector/script.js";
       import { profil_selector } from "./component/profil_selector/script.js";
       import { profil_selector_container } from "./component/profil_selector_container/script.js";
+      import { filtre_age } from "./component/age_filter/script.js";
       window.C = {};
 
       C.start = function () {
         V.renderNavBar("");
-        V.renderCategorie_selector("C.handlerCategSelect()");
         V.renderAllprofil();
-        V.renderAllfilm();
       };
 
       C.handlerCategSelect = async function () {
         let form = document.querySelector(".categorie__form");
         let fd = new FormData(form);
         let category = fd.get("categorie");
-        let res = await DataMovie.categorie(category);
+        let profil_choisi = document.querySelector(
+          ".restriction_profil--navbar"
+        );
+        let age = profil_choisi.getAttribute("id");
+        let res = await DataMovie.categorie(category, age);
         let card = document.querySelector("#card__list");
         card.innerHTML = "";
         let card_info = document.querySelector("#card__info_container");
@@ -85,8 +88,15 @@
         content.innerHTML = categorie_selectorForm.format(handler);
       };
 
-      V.renderAllfilm = async function () {
-        let datafilm = await DataMovie.request();
+      V.renderAllfilm = async function (age) {
+        let card = document.querySelector("#card__list");
+        let datafilm = await DataMovie.request(age);
+        if (datafilm.length === 0) {
+          card.innerHTML =
+            '<div class="no-results"><img src="../assets/images/Group 4.svg" alt="Aucune donnée disponible" /></div>';
+          card.style.display = "flex";
+          card.style.justifyContent = "center";
+        }
         datafilm.forEach((film) => {
           V.renderfilm_card(film);
         });
@@ -97,6 +107,17 @@
         dataProfil.forEach((profil) => {
           V.renderProfil_selector(profil);
         });
+      };
+
+      V.renderAge_restriction = async function () {
+        let profil_choisi = document.querySelector(
+          ".restriction_profil--navbar"
+        );
+        let age = profil_choisi.getAttribute("id");
+        let card = document.querySelector(".categorie_selector");
+        card.innerHTML += filtre_age.format(age);
+
+        V.renderAllfilm(age);
       };
 
       V.renderInfo_film = function (data) {
@@ -130,7 +151,7 @@
           card_info.innerHTML = "";
           card_list.style.padding = "2rem";
           V.renderCategorie_selector("C.handlerCategSelect()");
-          V.renderAllfilm();
+          V.renderAge_restriction();
         }
       });
 
@@ -144,12 +165,14 @@
           const profilId = target.getAttribute("id");
           const profil = await DataMovie.getunprofil(profilId);
           V.renderNavBar(profil);
+          V.renderCategorie_selector("C.handlerCategSelect()");
+          V.renderAge_restriction();
           pageDeConnexion.classList.add("hidden");
           document.body.classList.remove("no-scroll");
         }
       });
 
-      C.start(); // Démarre l'application
+      C.start();
     </script>
   </body>
 </html>
