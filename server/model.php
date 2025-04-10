@@ -120,7 +120,11 @@ function addProfil($Nom, $Age, $file) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
 
     // Requête SQL d'insertion du profil
-    $sql = "INSERT INTO Profil (name, age, image) VALUES (:name, :age, :image)";
+    $sql = "INSERT INTO Profil (name, age, image) 
+            VALUES (:name, :age, :image) 
+            ON DUPLICATE KEY 
+            UPDATE age = VALUES(age), 
+            image = VALUES(image);";
     $stmt = $cnx->prepare($sql);
 
     // Lie les paramètres
