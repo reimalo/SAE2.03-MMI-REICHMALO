@@ -1,0 +1,125 @@
+.profil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-evenly;
+    margin: 0.5rem auto;
+    gap: 0.5rem;
+
+    background: linear-gradient(135deg, #1f1f1f 0%, #2c2c2c 100%);
+    border-radius: 1rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    padding-inline: 5rem;
+    color: #fff;
+    font-family: var(--ff-Minigap);
+    transition: all 0.3s ease;
+}
+
+.profil:hover {
+    scale: 1.05;
+    transition: all 0.3s ease;
+}
+
+.profil:active {
+    scale: 0.95;
+    transition: all 0.3s ease;
+}
+
+.titre_profil {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #f0f0f0;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+
+.img_profil-sel {
+    width: 100%;
+    max-width: 5rem;
+    height: auto;
+    border-radius: 10rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.restriction_profil {
+    font-size: 1rem;
+    color: #ccc;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.restriction_title {
+    font-weight: bold;
+    color: #fff;
+}
+
+
+.profil--navbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-inline: 0.5rem;
+    padding-block: 0rem;
+    color: var(--color-fg);
+    background-color: var(--color-ban-1);
+}
+
+.img_profil-sel--navbar{
+    width: 2rem;
+    margin-top: 1rem;
+}
+
+.titre_profil--navbar{
+    font-size: 1rem;
+    margin-top: 1.2rem;
+}
+
+
+@media (min-width: 768px) {
+    .profil {
+        flex-direction: row;
+        max-width: 90%;
+        padding: 1rem;
+    }
+
+    .titre_profil {
+        font-size: 1.2rem;
+    }
+
+    .restriction_profil {
+        font-size: 0.9rem;
+    }
+
+    .img_profil-sel{
+        margin-top: 1rem;
+
+    }
+
+    .profil--navbar{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 1rem;
+        padding-inline: 5rem;
+        padding-block: 0rem;
+        color: var(--color-fg);
+        background-color: var(--color-ban-1);
+    }
+    
+    .img_profil-sel--navbar{
+        width: 5rem;
+        margin-top: 1rem;
+    }
+    
+    .titre_profil--navbar{
+        font-size: 2rem;
+        margin-top: 1.2rem;
+    }
+}

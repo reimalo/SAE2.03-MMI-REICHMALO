@@ -8,6 +8,7 @@
   </head>
 
   <body>
+    <section id="page_de_connexion"></section>
     <header id="header"></header>
     <section id="filter_container"></section>
     <section id="card__list"></section>
@@ -19,11 +20,15 @@
       import { DataMovie } from "./data/dataMovie.js";
       import { film_info } from "./component/film_info/script.js";
       import { categorie_selectorForm } from "./component/categorie_selector/script.js";
+      import { profil_selector } from "./component/profil_selector/script.js";
+      import { profil_selector_container } from "./component/profil_selector_container/script.js";
       window.C = {};
 
       C.start = function () {
-        V.renderNavBar();
+        V.renderNavBar("");
         V.renderCategorie_selector("C.handlerCategSelect()");
+        V.renderAllprofil();
+        V.renderAllfilm();
       };
 
       C.handlerCategSelect = async function () {
@@ -50,9 +55,9 @@
 
       window.V = {};
 
-      V.renderNavBar = function () {
+      V.renderNavBar = function (profil) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format();
+        header.innerHTML = NavBar.format(profil);
       };
 
       V.renderfilm_card = function (data) {
@@ -60,15 +65,39 @@
         card.innerHTML += film_card.format(data);
       };
 
+      V.renderProfil_selector_container = function () {
+        let content = document.querySelector("#page_de_connexion");
+        content.innerHTML = profil_selector_container.format();
+      };
+
+      V.renderProfil_selector = function (handler) {
+        V.renderProfil_selector_container();
+        setTimeout(() => {
+          let content = document.querySelector("#profil_menu");
+          if (content) {
+            content.innerHTML += profil_selector.format(handler);
+          }
+        }, 0); // Délai minimal pour permettre au DOM de se mettre à jour
+      };
+
       V.renderCategorie_selector = function (handler) {
         let content = document.querySelector("#filter_container");
         content.innerHTML = categorie_selectorForm.format(handler);
       };
 
-      let datafilm = await DataMovie.request();
-      datafilm.forEach((film) => {
-        V.renderfilm_card(film);
-      });
+      V.renderAllfilm = async function () {
+        let datafilm = await DataMovie.request();
+        datafilm.forEach((film) => {
+          V.renderfilm_card(film);
+        });
+      };
+
+      V.renderAllprofil = async function () {
+        let dataProfil = await DataMovie.getprofil();
+        dataProfil.forEach((profil) => {
+          V.renderProfil_selector(profil);
+        });
+      };
 
       V.renderInfo_film = function (data) {
         let info = document.querySelector("#card__info_container");
@@ -94,7 +123,29 @@
       document.addEventListener("click", (event) => {
         let closeButton = event.target.closest(".info__close_btn");
         if (closeButton) {
-          location.reload();
+          window.scrollTo(0, 0);
+          let card_list = document.querySelector("#card__list");
+          card_list.innerHTML = "";
+          let card_info = document.querySelector("#card__info_container");
+          card_info.innerHTML = "";
+          card_list.style.padding = "2rem";
+          V.renderCategorie_selector("C.handlerCategSelect()");
+          V.renderAllfilm();
+        }
+      });
+
+      const pageDeConnexion = document.querySelector("#page_de_connexion");
+      document.body.classList.add("no-scroll");
+      pageDeConnexion.classList.remove("hidden");
+      document.querySelector("#page_de_connexion");
+      document.addEventListener("click", async (event) => {
+        const target = event.target.closest(".profil");
+        if (target) {
+          const profilId = target.getAttribute("id");
+          const profil = await DataMovie.getunprofil(profilId);
+          V.renderNavBar(profil);
+          pageDeConnexion.classList.add("hidden");
+          document.body.classList.remove("no-scroll");
         }
       });
 

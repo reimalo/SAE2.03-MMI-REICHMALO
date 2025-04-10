@@ -1,8 +1,29 @@
 <nav class="navbar font-sans">
-  <img class="logo logo--navbar" src="../assets/images/moonvie.png" alt="Logo" />
+  <img
+    class="logo logo--navbar"
+    src="../assets/images/moonvie.png"
+    alt="Logo"
+  />
   <ul class="navbar__list">
+    <li class="navbar__item navbar__item--profil navbar__item--invisible">
+      <button onclick="location.reload()" class="deconnexion">
+        <h2>log out</h2>
+      </button>
+      <div id="{{id}}" class="profil profil--navbar">
+        <h1 class="titre_profil titre_profil--navbar">{{name}}</h1>
+        <img
+          class="img_profil-sel img_profil-sel--navbar"
+          src="{{chemin}}"
+          alt=""
+        />
+        <p class="restriction_profil restriction_profil--navbar">
+          <span class="restriction_title restriction_title--navbar">Age :</span>
+          {{Age}}
+        </p>
+      </div>
+    </li>
     <li class="navbar__item">
-      <p class="navbar__citation">Voir des films à tout Moments</a>
+      <p class="navbar__citation">Voir des films à tout Moments</p>
     </li>
   </ul>
 </nav>

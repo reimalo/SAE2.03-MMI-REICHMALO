@@ -29,6 +29,7 @@
     border-color: #00bfff; /* Bordure bleue au focus */
     box-shadow: 0 0 8px rgba(0, 191, 255, 0.5); /* Effet lumineux */
     outline: none;
+    background-color: var(--color-white);
     color: black;
 }
 

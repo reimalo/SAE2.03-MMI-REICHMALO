@@ -1,0 +1,81 @@
+.profil_selector_container {
+    position: relative;
+    width: 100%;
+    margin: 1rem auto;
+    font-family: var(--ff-Minigap);
+    color: var(--color-white);
+  }
+  
+  /* Label */
+  .profil_label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Menu déroulant */
+  .profil_menu {
+    max-height: 20rem;
+    overflow-y: auto; 
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background-color: #f9f9f9;
+    padding: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style des profils */
+  .profil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1f1f1f 0%, #2c2c2c 100%);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .titre_profil {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    color: #f0f0f0;
+  }
+  
+  .img_profil {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .restriction_profil {
+    font-size: 0.9rem;
+    color: #ccc;
+    text-align: center;
+  }
+  
+  .restriction_title {
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  /* Ajout d'un style pour la barre de défilement */
+  .profil_menu::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .profil_menu::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+  }
+  
+  .profil_menu::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
+  }

@@ -117,3 +117,15 @@ function add_profilController() {
         return "Erreur, le profil n'a pas été ajouté";
     }
 }
+
+
+function getprofilController(){
+    $profil_list = getAllProfil();
+    return $profil_list;
+}
+
+function getunprofilController(){
+    $id = $_REQUEST['id'];
+    $profil = getunProfil($id);
+    return $profil;
+}

@@ -21,3 +21,28 @@ body {
     width: 20rem;
     height: 20rem;
 }
+
+#page_de_connexion{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    z-index: 1000;
+    padding-block: 2rem;
+    padding-bottom: 5rem;
+    padding-inline: 1rem;
+    background-color: var(--color-fond-2);
+    border-radius: 1.5rem;
+    border: 1px solid var(--color-fond-1);
+    color: var(--color-white);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+}
+
+#page_de_connexion.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}

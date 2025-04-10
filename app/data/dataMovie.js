@@ -19,4 +19,16 @@ DataMovie.categorie = async function (category) {
     return data;
 }
 
+DataMovie.getprofil = async function () {
+    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=getprofil`);
+    let data = await answer.json();
+    return data;
+}
+
+DataMovie.getunprofil = async function (id) {
+    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=getunprofil&id=${id}`);
+    let data = await answer.json();
+    return data;
+}
+
 export { DataMovie };
