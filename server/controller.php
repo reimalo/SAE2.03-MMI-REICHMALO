@@ -81,7 +81,7 @@ function categorie_selectionController(){
     $category_name = $_REQUEST['category'];
     $age = $_REQUEST['age'];
     if ($category_name === "none") {
-        $categories = getAllFilm();
+        $categories = getAllFilm($age);
     } else {
         $categories = getFilmCategorie($category_name, $age);
     }
@@ -130,4 +130,32 @@ function getunprofilController(){
     $id = $_REQUEST['id'];
     $profil = getunProfil($id);
     return $profil;
+}
+
+function addFavorisController(){
+    $id_film = $_REQUEST['id_film'];
+    $id_profil = $_REQUEST['id_user'];
+    $ok = addFavoris($id_film, $id_profil);
+    if ($ok != 0) {
+        return "Le film à été ajouté aux favoris";
+    } else {
+        return "Erreur, le film n'a pas été ajouté aux favoris";
+    }
+}
+
+function delFavorisController(){
+    $id_film = $_REQUEST['id_film'];
+    $id_profil = $_REQUEST['id_user'];
+    $ok = delFavoris($id_film, $id_profil);
+    if ($ok != 0) {
+        return "Le film à été supprimé des favoris";
+    } else {
+        return "Erreur, le film n'a pas été supprimé des favoris";
+    }
+}
+
+function getFavorisController(){
+    $id_profil = $_REQUEST['id_user'];
+    $favoris = getFavoris($id_profil);
+    return $favoris;
 }

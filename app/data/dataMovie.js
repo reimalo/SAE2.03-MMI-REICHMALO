@@ -31,4 +31,28 @@ DataMovie.getunprofil = async function (id) {
     return data;
 }
 
+DataMovie.addFavoris = async function (id_user, id_film) {
+    let config = {
+        method: "POST",
+    };
+    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=addFavoris&id_user=${id_user}&id_film=${id_film}`, config);
+    let data = await answer.json();
+    return data;
+}
+
+DataMovie.delFavoris = async function (id_user, id_film) {
+    let config = {
+        method: "POST",
+    };
+    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=delFavoris&id_user=${id_user}&id_film=${id_film}`, config);
+    let data = await answer.json();
+    return data;
+}
+
+DataMovie.getFavoris = async function (id_user) {
+    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=getFavoris&id_user=${id_user}`);
+    let data = await answer.json();
+    return data;
+}
+
 export { DataMovie };

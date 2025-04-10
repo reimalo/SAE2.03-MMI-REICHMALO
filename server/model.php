@@ -168,3 +168,50 @@ function getunProfil($id){
     $res = $stmt->fetch(PDO::FETCH_OBJ);
     return $res; // Retourne les résultats
 }
+
+function addFavoris($id_film, $id_profil) {
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL d'insertion du film
+    $sql = "INSERT INTO Favoris (id_film, id_profil) 
+            VALUES (:id_film, :id_profil)";
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);
+    // Lie les paramètres
+    $stmt->bindParam(':id_film', $id_film, PDO::PARAM_INT);
+    $stmt->bindParam(':id_profil', $id_profil, PDO::PARAM_INT);
+    // Exécute la requête SQL
+    $stmt->execute();
+    // Retourne le nombre de lignes affectées
+    return $stmt->rowCount();
+}
+
+function delFavoris($id_film, $id_profil) {
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL d'insertion du film
+    $sql = "DELETE FROM Favoris WHERE id_film = :id_film AND id_profil = :id_profil";
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);
+    // Lie les paramètres
+    $stmt->bindParam(':id_film', $id_film, PDO::PARAM_INT);
+    $stmt->bindParam(':id_profil', $id_profil, PDO::PARAM_INT);
+    // Exécute la requête SQL
+    $stmt->execute();
+    // Retourne le nombre de lignes affectées
+    return $stmt->rowCount();
+}
+
+function getFavoris($id_profil) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT Movie.id
+            FROM Favoris 
+            JOIN Movie ON Favoris.id_film = Movie.id 
+            WHERE Favoris.id_profil = :id_profil";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_profil', $id_profil, PDO::PARAM_INT);
+    $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+
+    return $res;
+}

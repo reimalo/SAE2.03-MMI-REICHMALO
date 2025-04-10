@@ -24,7 +24,7 @@
       import { profil_selector_container } from "./component/profil_selector_container/script.js";
       import { filtre_age } from "./component/age_filter/script.js";
       window.C = {};
-
+      DataMovie.info;
       C.start = function () {
         V.renderNavBar("");
         V.renderAllprofil();
@@ -63,9 +63,27 @@
         header.innerHTML = NavBar.format(profil);
       };
 
-      V.renderfilm_card = function (data) {
+      V.renderfilm_card = async function (data) {
+        let profilNavbar = document.querySelector(".profil--navbar");
+        if (!profilNavbar) {
+          console.error("L'élément .profil--navbar n'est pas encore chargé.");
+          return;
+        }
+
+        let id_user = profilNavbar.getAttribute("id");
+
+        // Attendre les favoris de l'utilisateur
+        let favoris_icon = await DataMovie.getFavoris(id_user);
+
+        // Vérifier si les favoris sont bien chargés
+        if (!Array.isArray(favoris_icon)) {
+          console.error("Les favoris n'ont pas pu être chargés.");
+          return;
+        }
+
+        // Ajouter le film au conteneur
         let card = document.querySelector("#card__list");
-        card.innerHTML += film_card.format(data);
+        card.innerHTML += film_card.format(data, favoris_icon);
       };
 
       V.renderProfil_selector_container = function () {
@@ -133,9 +151,11 @@
 
       document.querySelector("#card__list");
       document.addEventListener("click", async (event) => {
-        let target = event.target.closest(".carte");
+        let target_parent = event.target.closest(".carte");
+        let target =
+          event.target.closest(".cart__img") || event.target.closest(".info");
         if (target) {
-          let filmId = target.getAttribute("id");
+          let filmId = target_parent.getAttribute("id");
           let info_film = await DataMovie.info(filmId);
           V.renderInfo_film(info_film);
         }
@@ -172,6 +192,24 @@
         }
       });
 
+      document.addEventListener("click", (event) => {
+        const target = event.target.closest(".favoris_star");
+        if (target) {
+          let id_carte = target.closest(".carte").getAttribute("id");
+          let id_user = document
+            .querySelector(".profil--navbar")
+            .getAttribute("id");
+          if (target.src.includes("star_notactive.svg")) {
+            target.src = "../assets/images/star_active.svg";
+            target.style.backgroundColor = "var(--color-white)";
+            DataMovie.addFavoris(id_user, id_carte);
+          } else {
+            target.src = "../assets/images/star_notactive.svg";
+            target.style.backgroundColor = "var(--color-yellow)";
+            DataMovie.delFavoris(id_user, id_carte);
+          }
+        }
+      });
       C.start();
     </script>
   </body>
