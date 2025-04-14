@@ -12,4 +12,6 @@
 @import "../component/profil_selector/style.css" layer(components);
 @import "../component/age_filter/style.css" layer(components);
 @import "../component/film_favoris/style.css" layer(components);
+@import "../component/titre_en_avant/style.css" layer(components);
+@import "../component/film_card_en_avant/style.css" layer(components);
 @import "./composent_mere.css" layer(components);

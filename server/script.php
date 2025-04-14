@@ -92,6 +92,10 @@ if ( isset($_REQUEST['todo']) ){
     case 'getFavoris':
       $data = getFavorisController();
       break;
+      
+    case 'read_enAvant':
+      $data = read_enAvantController();
+      break;
 
 
 

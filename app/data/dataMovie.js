@@ -55,4 +55,9 @@ DataMovie.getFavoris = async function (id_user) {
     return data;
 }
 
+DataMovie.request_enAvant = async function (age) {
+    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=read_enAvant&age=${age}`);
+    let data = await answer.json();
+    return data;
+}
 export { DataMovie };

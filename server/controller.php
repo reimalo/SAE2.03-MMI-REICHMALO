@@ -102,7 +102,7 @@ function add_profilController() {
     if (empty($_REQUEST['Age']) || !is_numeric($_REQUEST['Age'])) {
         return "Erreur : L'age est obligatoire et doit être un nombre.";
     }
-    $file = null;
+    $file = "none.svg";
     if (isset($_FILES['file']) && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
         $tmp_name = $_FILES['file']['tmp_name'];
         $filename = basename($_FILES['file']['name']);
@@ -164,4 +164,10 @@ function getFavorisController(){
     $id_profil = $_REQUEST['id_user'];
     $favoris = getFavoris($id_profil);
     return $favoris;
+}
+
+function read_enAvantController(){
+    $age = $_REQUEST['age'];
+    $film_list = getAllFilmEnAvant($age);
+    return $film_list;
 }

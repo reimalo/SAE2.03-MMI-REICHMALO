@@ -1,0 +1,38 @@
+.carte_en_avant{
+    width: 60%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--color-fond-carte);
+}
+
+.cart__img_en_avant{
+    width: 10rem;
+    height: 80%;
+    border-radius: 0.5rem 0.5rem 0 0;
+    object-fit: cover;
+}
+
+.titre_card_en_avant {
+    max-width: 7rem;
+    font-size: 0.8rem;
+    white-space: normal; 
+}
+
+@media (min-width: 768px) {
+    .carte_en_avant{
+        width: 20%;
+    }
+
+    .cart__img_en_avant{
+        width: 16rem;
+    }
+
+    .titre_card_en_avant {
+        font-size: 1rem;
+    }
+    
+}

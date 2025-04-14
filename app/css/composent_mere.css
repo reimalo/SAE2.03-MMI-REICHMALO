@@ -48,3 +48,15 @@ body {
 body.no-scroll {
     overflow: hidden;
 }
+
+#mis_en_avant{
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #2D2D2E transparent;
+}

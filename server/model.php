@@ -228,3 +228,16 @@ function getAllFilmFavoris($id_profil) {
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res;
 }
+
+function getAllFilmEnAvant($age) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT Movie.*
+            FROM En_avant
+            JOIN Movie ON En_avant.id_film = Movie.id
+            WHERE Movie.min_age <= :age";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':age', $age, PDO::PARAM_INT);
+    $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}

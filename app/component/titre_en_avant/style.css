@@ -1,0 +1,23 @@
+.titre_en_avant{
+    border-bottom: 0.1rem solid white;
+    margin-left: 1rem;
+    margin-right: 5rem;
+}
+
+
+.no-results-en-avant{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.image_no_en_avant{
+    width: 20rem;
+}
+
+
+@media (min-width: 768px) {
+    .image_no_en_avant{
+        width: 40rem;
+    }
+}
