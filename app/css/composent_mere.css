@@ -60,3 +60,10 @@ body.no-scroll {
     scrollbar-width: thin;
     scrollbar-color: #2D2D2E transparent;
 }
+
+#cherchbar_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}

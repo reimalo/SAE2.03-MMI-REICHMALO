@@ -10,9 +10,10 @@
   <body>
     <section id="page_de_connexion"></section>
     <header id="header"></header>
-    <section id="filter_container"></section>
     <section id="title_container-avant"></section>
     <section id="mis_en_avant"></section>
+    <section id="filter_container"></section>
+    <section id="cherchbar_container"></section>
     <section id="card__list"></section>
     <section id="card__info_container"></section>
 
@@ -28,6 +29,7 @@
       import { film_favoris } from "./component/film_favoris/script.js";
       import { titre_en_avant } from "./component/titre_en_avant/script.js";
       import { film_card_en_avant } from "./component/film_card_en_avant/script.js";
+      import { cherch_bar } from "./component/cherch_bar/script.js";
       window.C = {};
       DataMovie.info;
       C.start = function () {
@@ -225,6 +227,11 @@
         });
       };
 
+      V.render_cherch_bar = async function () {
+        let selector = document.querySelector("#cherchbar_container");
+        selector.innerHTML += cherch_bar.format();
+      };
+
       document.querySelector("#card__list");
       document.addEventListener("click", async (event) => {
         let target_parent = event.target.closest(".carte");
@@ -289,6 +296,7 @@
           V.renderNavBar(profil);
           V.renderCategorie_selector("C.handlerCategSelect()");
           V.renderAge_restriction();
+          V.render_cherch_bar();
           pageDeConnexion.classList.add("hidden");
           document.body.classList.remove("no-scroll");
         }

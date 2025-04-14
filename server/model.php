@@ -241,3 +241,41 @@ function getAllFilmEnAvant($age) {
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res;
 }
+
+function getAllFilm_char($age, $char) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+
+    $char = strtolower($char);
+    $sql = "SELECT * FROM Movie WHERE min_age <= $age";
+
+    // Ajoute un AND name LIKE '%x%' pour chaque lettre
+    for ($i = 0; $i < strlen($char); $i++) {
+        $letter = $char[$i];
+        $sql .= " AND LOWER(name) LIKE '%$letter%'";
+    }
+
+    $stmt = $cnx->query($sql);
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
+
+
+
+function getAllFilmFavoris_char($id_profil, $char) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+
+    $char = strtolower($char);
+    $sql = "SELECT Movie.* 
+            FROM Favoris 
+            JOIN Movie ON Favoris.id_film = Movie.id 
+            WHERE Favoris.id_profil = $id_profil";
+
+    for ($i = 0; $i < strlen($char); $i++) {
+        $letter = $char[$i];
+        $sql .= " AND LOWER(Movie.name) LIKE '%$letter%'";
+    }
+
+    $stmt = $cnx->query($sql);
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
