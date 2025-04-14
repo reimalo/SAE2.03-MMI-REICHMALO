@@ -1,4 +1,4 @@
-<nav class="navbar font-sans">
+<nav class="navbar">
   <img
     class="logo logo--navbar"
     src="../assets/images/moonvie.png"
@@ -7,23 +7,27 @@
   <ul class="navbar__list">
     <li class="navbar__item navbar__item--profil navbar__item--invisible">
       <button onclick="location.reload()" class="deconnexion">
-        <h2>log out</h2>
+        <img class="logout_image" src="../assets/images/logout.svg" />
       </button>
-      <div id="{{id}}" class="profil profil--navbar">
-        <h1 class="titre_profil titre_profil--navbar">{{name}}</h1>
-        <img
-          class="img_profil-sel img_profil-sel--navbar"
-          src="{{chemin}}"
-          alt=""
-        />
-        <p
-          id="{{Age_id}}"
-          class="restriction_profil restriction_profil--navbar"
-        >
-          <span class="restriction_title restriction_title--navbar">Age :</span>
-          {{Age}}
-        </p>
-      </div>
+    </li>
+    <li class="navbar__item navbar__profil--invisible navbar__item--profil">
+      <ul id="{{id}}" class="profil--navbar">
+        <li>
+          <img class="img_profil-sel--navbar" src="{{chemin}}" alt="" />
+        </li>
+        <li>
+          <h1 class="titre_profil--navbar">{{name}}</h1>
+        </li>
+        <li>
+          <p id="{{Age_id}}" class="restriction_profil--navbar">
+            <span class="restriction_title--navbar">Age :</span>
+            {{Age}}
+          </p>
+        </li>
+        <li>
+          <img class="favoris_profil" src="../assets/images/star_active" />
+        </li>
+      </ul>
     </li>
     <li class="navbar__item">
       <p class="navbar__citation">Voir des films à tout Moments</p>

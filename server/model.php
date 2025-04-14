@@ -215,3 +215,16 @@ function getFavoris($id_profil) {
 
     return $res;
 }
+
+function getAllFilmFavoris($id_profil) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT Movie.*
+            FROM Favoris
+            JOIN Movie ON Favoris.id_film = Movie.id
+            WHERE Favoris.id_profil = :id_profil";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_profil', $id_profil, PDO::PARAM_INT);
+    $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}

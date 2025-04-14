@@ -9,9 +9,26 @@
   border-bottom: 1px solid var(--color-white);
 }
 
+
+.navbar__list{
+  display: flex;
+}
+
 .navbar__item--invisible {
   display: none;
 }
+
+.navbar__profil--visible{
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar__profil--invisible{
+  display: none;
+}
+
 
 .navbar__item--visible {
   display: flex;
@@ -24,11 +41,16 @@
 .deconnexion{
   font-size: 0.5rem;
   margin: 0.5rem;
+  padding: 0.5rem;
   background-color: brown;
   border-radius: 0.5rem;
   border: none;
   font-family: var(--ff-Minigap);
   color : var(--color-white);
+}
+
+.logout_image{
+  width: 1.5rem;
 }
 
 .deconnexion:hover{
@@ -55,6 +77,45 @@
   margin: 0;
 }
 
+.profil--navbar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+  padding-block: 0.3rem;
+  padding-inline: 1rem;
+  border-radius: 1rem;
+  background-color: var(--color-black);
+}
+
+.img_profil-sel--navbar{
+  width: 3rem;
+  height: 3rem;
+  border-radius: 10rem;
+}
+
+.titre_profil--navbar,
+.restriction_profil--navbar
+{
+  display: none;
+}
+
+
+.favoris_profil{
+  transition: all 0.3s ease;
+}
+
+.favoris_profil:hover{
+  scale: 1.25;
+  transition: all 0.3s ease;
+  
+}
+
+.favoris_profil:active{
+  scale: 0.95;
+  transition: all 0.3s ease;
+
+}
 
 
 @media (min-width: 768px) {
@@ -72,11 +133,6 @@
     font-size: 1.5rem;
   }
 
-  .profil--navbar {
-    display: flex;
-    flex-direction: row;
-    padding-inline: 0;
-  }
 
   .deconnexion{
     font-size: 1rem;
@@ -88,4 +144,27 @@
     font-family: var(--ff-Minigap);
     color : var(--color-white);
   }
+
+  .titre_profil--navbar,
+  .restriction_profil--navbar,
+  .favoris_profil
+    {
+      display: block;
+    }
+
+    .profil--navbar{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      padding-block: 1rem;
+      padding-inline: 5rem;
+      border-radius: 2rem;
+      color: var(--color-white);
+      background-color: var(--color-black);
+      font-family: var(--ff-Minigap);
+      box-shadow: 0 0.2rem 0.3rem var(--color-black);
+    }
+
 }

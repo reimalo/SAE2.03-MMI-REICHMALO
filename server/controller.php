@@ -4,7 +4,13 @@
 require("model.php");
 function readController(){
     $age = $_REQUEST['age'];
-    $film_list = getAllFilm($age);
+    $id = $_REQUEST['favoris_profil_id'];
+    if ($id != ""){
+        $film_list = getAllFilmFavoris($id);
+    }
+    else{
+        $film_list = getAllFilm($age);
+    }
     return $film_list;
 }
 

@@ -58,30 +58,6 @@
 }
 
 
-.profil--navbar{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    padding-inline: 0.5rem;
-    padding-block: 0rem;
-    color: var(--color-fg);
-    background-color: var(--color-ban-1);
-    pointer-events: none; /* permet de désactiver les effet de cet élément lors du clic (ici cela sert pour le profil de la navbar)*/
-}
-
-.img_profil-sel--navbar{
-    width: 2rem;
-    margin-top: 1rem;
-}
-
-.titre_profil--navbar{
-    font-size: 1rem;
-    margin-top: 1.2rem;
-}
-
-
 @media (min-width: 768px) {
     .profil {
         flex-direction: row;
@@ -102,25 +78,4 @@
 
     }
 
-    .profil--navbar{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 2rem;
-        margin-bottom: 1rem;
-        padding-inline: 5rem;
-        padding-block: 0rem;
-        color: var(--color-fg);
-        background-color: var(--color-ban-1);
-    }
-    
-    .img_profil-sel--navbar{
-        width: 5rem;
-        margin-top: 1rem;
-    }
-    
-    .titre_profil--navbar{
-        font-size: 2rem;
-        margin-top: 1.2rem;
-    }
 }

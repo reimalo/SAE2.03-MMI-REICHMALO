@@ -23,6 +23,7 @@
       import { profil_selector } from "./component/profil_selector/script.js";
       import { profil_selector_container } from "./component/profil_selector_container/script.js";
       import { filtre_age } from "./component/age_filter/script.js";
+      import { film_favoris } from "./component/film_favoris/script.js";
       window.C = {};
       DataMovie.info;
       C.start = function () {
@@ -55,7 +56,6 @@
           V.renderfilm_card(film);
         });
       };
-
       window.V = {};
 
       V.renderNavBar = function (profil) {
@@ -149,6 +149,27 @@
         info.innerHTML = film_info.format(data);
       };
 
+      V.renderAllFavorisFilm = async function (id) {
+        let card = document.querySelector("#card__list");
+        let datafilm = await DataMovie.request("", id);
+        if (datafilm.length === 0) {
+          card.innerHTML =
+            '<div class="no-results"><img src="../assets/images/Group 4.svg" alt="Aucune donnée disponible" /></div>';
+          card.style.display = "flex";
+          card.style.justifyContent = "center";
+        }
+        datafilm.forEach((film) => {
+          V.renderfilm_card(film);
+        });
+      };
+
+      V.renderHeader_favoris = async function () {
+        let card_list = document.querySelector("#card__list");
+        card_list.innerHTML = "";
+        let filter = document.querySelector("#filter_container");
+        filter.innerHTML = film_favoris.format();
+      };
+
       document.querySelector("#card__list");
       document.addEventListener("click", async (event) => {
         let target_parent = event.target.closest(".carte");
@@ -167,6 +188,7 @@
           window.scrollTo(0, 0);
           let card_list = document.querySelector("#card__list");
           card_list.innerHTML = "";
+          card_list.style.display = "grid";
           let card_info = document.querySelector("#card__info_container");
           card_info.innerHTML = "";
           card_list.style.padding = "2rem";
@@ -208,6 +230,17 @@
             target.style.backgroundColor = "var(--color-yellow)";
             DataMovie.delFavoris(id_user, id_carte);
           }
+        }
+      });
+
+      document.addEventListener("click", (event) => {
+        let FavorisButton = event.target.closest(".favoris_profil");
+        if (FavorisButton) {
+          let id_user = document
+            .querySelector(".profil--navbar")
+            .getAttribute("id");
+          V.renderHeader_favoris();
+          V.renderAllFavorisFilm(id_user);
         }
       });
       C.start();
