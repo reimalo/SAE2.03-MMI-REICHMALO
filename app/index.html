@@ -11,6 +11,7 @@
     <section id="page_de_connexion"></section>
     <header id="header"></header>
     <section id="filter_container"></section>
+    <section id="mis_en_avant"></section>
     <section id="card__list"></section>
     <section id="card__info_container"></section>
 
@@ -144,7 +145,9 @@
         let card_list_sup = document.querySelector("#card__list");
         let categorieSelector = document.querySelector(".categorie_selector");
         card_list_sup.innerHTML = "";
-        categorieSelector.style.display = "none";
+        if (categorieSelector) {
+          categorieSelector.style.display = "none";
+        }
         card_list_sup.style.padding = "0";
         info.innerHTML = film_info.format(data);
       };
@@ -166,8 +169,10 @@
       V.renderHeader_favoris = async function () {
         let card_list = document.querySelector("#card__list");
         card_list.innerHTML = "";
+        let categorieSelector = document.querySelector(".categorie_selector");
+        categorieSelector.style.display = "none";
         let filter = document.querySelector("#filter_container");
-        filter.innerHTML = film_favoris.format();
+        filter.innerHTML += film_favoris.format();
       };
 
       document.querySelector("#card__list");
@@ -192,6 +197,9 @@
           let card_info = document.querySelector("#card__info_container");
           card_info.innerHTML = "";
           card_list.style.padding = "2rem";
+          let categorieSelector = document.querySelector(".categorie_selector");
+          categorieSelector.style.display = "flex";
+          categorieSelector.sty;
           V.renderCategorie_selector("C.handlerCategSelect()");
           V.renderAge_restriction();
         }
