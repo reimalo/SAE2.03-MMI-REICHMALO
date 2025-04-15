@@ -25,6 +25,9 @@
       import { NavBar } from "./component/NavBar/script.js";
       import { NewFilmForm } from "./component/NewFilmForm/script.js";
       import { NewProfilForm } from "./component/NewProfilForm/script.js";
+      import { NewAvantForm } from "./component/Mettre_en_avant/script.js";
+      import { cherch_bar } from "./component/cherch_bar/script.js";
+      import { film_card } from "./component/film_card/script.js";
       import { DataMovie } from "./data/dataMovie.js";
 
       window.C = {};
@@ -32,6 +35,9 @@
       C.start = function () {
         showPopup("Démarrage de l'application");
         V.renderNewFilm("C.handleradd_film()");
+        V.renderNewAvant("C.handleradd_Avant()");
+        V.renderCherchbar();
+        initCherchBarEvents();
         V.renderNavBar();
       };
 
@@ -46,6 +52,13 @@
         let form = document.querySelector(".addProfil__form");
         let fd = new FormData(form);
         let res = await DataMovie.add_profil(fd);
+        showPopup(res); // Affiche le résultat dans un pop-up
+      };
+
+      C.handleradd_Avant = async function () {
+        let form = document.querySelector(".addAvant__form");
+        let fd = new FormData(form);
+        let res = await DataMovie.add_Avant(fd);
         showPopup(res); // Affiche le résultat dans un pop-up
       };
 
@@ -66,6 +79,35 @@
         header.innerHTML = NavBar.format();
       };
 
+      V.renderNewAvant = function (handler) {
+        let content = document.querySelector("#form_container");
+        content.innerHTML += NewAvantForm.format(handler);
+      };
+
+      V.renderCherchbar = function () {
+        let placement = document.querySelector(".chearch");
+        placement.innerHTML = cherch_bar.format();
+      };
+
+      V.renderUnFilm = function (data) {
+        let card = document.querySelector(".fiml_cherch_container");
+        card.innerHTML += film_card.format(data);
+      };
+
+      V.renderAllfilm_cherch = async function (query) {
+        let card = document.querySelector(".fiml_cherch_container");
+        let datafilm = await DataMovie.request_char(query);
+        if (datafilm.length === 0) {
+          card.innerHTML =
+            '<div class="no-results"><img src="../assets/images/Group 4.svg" alt="Aucune donnée disponible" /></div>';
+          card.style.display = "flex";
+          card.style.justifyContent = "center";
+        }
+        datafilm.forEach((film) => {
+          V.renderUnFilm(film);
+        });
+      };
+
       function showPopup(message) {
         const popupContainer = document.getElementById("popup-container");
 
@@ -82,11 +124,13 @@
           popup.remove();
         }, 5000);
       }
-
       document
         .querySelector(".menu__item--film")
         .addEventListener("click", async () => {
           V.renderNewFilm("C.handleradd_film()");
+          V.renderNewAvant("C.handleradd_Avant()");
+          V.renderCherchbar();
+          initCherchBarEvents();
         });
 
       document
@@ -94,6 +138,26 @@
         .addEventListener("click", async () => {
           V.renderNewProfil("C.handleradd_Profil()");
         });
+
+      function initCherchBarEvents() {
+        const searchInput = document.querySelector(".chearch");
+        searchInput.addEventListener("input", function (event) {
+          const query = event.target.value;
+          let card_list = document.querySelector(".fiml_cherch_container");
+          card_list.innerHTML = "";
+          V.renderAllfilm_cherch(query);
+        });
+      }
+
+      function setupCarteCheckboxListener() {
+        const container = document.querySelector(".fiml_cherch_container");
+        container.addEventListener("click", (event) => {
+          const target = event.target.closest("#checkbox");
+          const carte = target.closest(".carte");
+          const id_carte = carte.getAttribute("id");
+          DataMovie.add_Avant(id_carte);
+        });
+      }
 
       C.start();
     </script>

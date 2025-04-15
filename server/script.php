@@ -97,7 +97,13 @@ if ( isset($_REQUEST['todo']) ){
       $data = read_enAvantController();
       break;
 
+    case 'read_forForm':
+      $data = read_forFormController();
+      break;
 
+    case 'add_Avant':
+      $data = add_AvantController();
+      break;
 
 
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée

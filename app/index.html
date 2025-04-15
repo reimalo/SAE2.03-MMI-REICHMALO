@@ -88,19 +88,12 @@
           console.error("L'élément .profil--navbar n'est pas encore chargé.");
           return;
         }
-
         let id_user = profilNavbar.getAttribute("id");
-
-        // Attendre les favoris de l'utilisateur
         let favoris_icon = await DataMovie.getFavoris(id_user);
-
-        // Vérifier si les favoris sont bien chargés
         if (!Array.isArray(favoris_icon)) {
           console.error("Les favoris n'ont pas pu être chargés.");
           return;
         }
-
-        // Ajouter le film au conteneur
         let card = document.querySelector("#card__list");
         card.innerHTML += film_card.format(data, favoris_icon);
       };
@@ -133,7 +126,7 @@
           if (content) {
             content.innerHTML += profil_selector.format(handler);
           }
-        }, 0); // Délai minimal pour permettre au DOM de se mettre à jour
+        }, 0); // Délai pour permettre a la DOM de se mettre à jour
       };
 
       V.renderCategorie_selector = function (handler) {
@@ -234,7 +227,7 @@
 
       V.renderAllfilm_cherch = async function (age, char) {
         let card = document.querySelector("#card__list");
-        let datafilm = await DataMovie.request(age,"",char);
+        let datafilm = await DataMovie.request(age, "", char);
         if (datafilm.length === 0) {
           card.innerHTML =
             '<div class="no-results"><img src="../assets/images/Group 4.svg" alt="Aucune donnée disponible" /></div>';
@@ -246,138 +239,152 @@
         });
       };
 
+      document
+        .querySelector("#card__list")
+        .addEventListener("click", async (event) => {
+          let target_parent = event.target.closest(".carte");
+          let target =
+            event.target.closest(".cart__img") || event.target.closest(".info");
+          if (target) {
+            let filmId = target_parent.getAttribute("id");
+            let info_film = await DataMovie.info(filmId);
+            let avant_title = document.querySelector("#title_container-avant");
+            let avant_enAvant = document.querySelector("#mis_en_avant");
+            avant_title.innerHTML = "";
+            avant_enAvant.innerHTML = "";
+            V.renderInfo_film(info_film);
+          }
+        });
 
-      document.querySelector("#card__list").addEventListener("click", async (event) => {
-        let target_parent = event.target.closest(".carte");
-        let target =
-          event.target.closest(".cart__img") || event.target.closest(".info");
-        if (target) {
-          let filmId = target_parent.getAttribute("id");
-          let info_film = await DataMovie.info(filmId);
-          let avant_title = document.querySelector("#title_container-avant");
-          let avant_enAvant = document.querySelector("#mis_en_avant");
-          avant_title.innerHTML = "";
-          avant_enAvant.innerHTML = "";
-          V.renderInfo_film(info_film);
-        }
-      });
+      document
+        .querySelector("#mis_en_avant")
+        .addEventListener("click", async (event) => {
+          let target_parent = event.target.closest(".carte_en_avant");
+          let target =
+            event.target.closest(".info_en_avant") ||
+            event.target.closest(".cart__img_en_avant");
+          if (target) {
+            let filmId = target_parent.getAttribute("id");
+            let info_film = await DataMovie.info(filmId);
+            let avant_title = document.querySelector("#title_container-avant");
+            let avant_enAvant = document.querySelector("#mis_en_avant");
+            avant_title.innerHTML = "";
+            avant_enAvant.innerHTML = "";
+            let cherch = document.querySelector("#cherchbar_container");
+            cherch.innerHTML = "";
+            V.renderInfo_film(info_film);
+          }
+        });
 
-      document.querySelector("#mis_en_avant").addEventListener("click", async (event) => {
-        let target_parent = event.target.closest(".carte_en_avant");
-        let target =
-          event.target.closest(".info_en_avant") ||
-          event.target.closest(".cart__img_en_avant");
-        if (target) {
-          let filmId = target_parent.getAttribute("id");
-          let info_film = await DataMovie.info(filmId);
-          let avant_title = document.querySelector("#title_container-avant");
-          let avant_enAvant = document.querySelector("#mis_en_avant");
-          avant_title.innerHTML = "";
-          avant_enAvant.innerHTML = "";
-          let cherch = document.querySelector("#cherchbar_container");
-          cherch.innerHTML = "";
-          V.renderInfo_film(info_film);
-        }
-      });
+      document
+        .querySelector("#card__info_container")
+        .addEventListener("click", (event) => {
+          let closeButton = event.target.closest(".info__close_btn");
+          if (closeButton) {
+            window.scrollTo(0, 0);
+            let card_list = document.querySelector("#card__list");
+            card_list.innerHTML = "";
+            card_list.style.display = "grid";
+            let card_info = document.querySelector("#card__info_container");
+            card_info.innerHTML = "";
+            card_list.style.padding = "2rem";
+            let categorieSelector = document.querySelector(
+              ".categorie_selector"
+            );
+            categorieSelector.style.display = "flex";
+            categorieSelector.sty;
 
-      document.querySelector("#card__info_container").addEventListener("click", (event) => {
-        let closeButton = event.target.closest(".info__close_btn");
-        if (closeButton) {
-          window.scrollTo(0, 0);
-          let card_list = document.querySelector("#card__list");
-          card_list.innerHTML = "";
-          card_list.style.display = "grid";
-          let card_info = document.querySelector("#card__info_container");
-          card_info.innerHTML = "";
-          card_list.style.padding = "2rem";
-          let categorieSelector = document.querySelector(".categorie_selector");
-          categorieSelector.style.display = "flex";
-          categorieSelector.sty;
+            V.renderCategorie_selector("C.handlerCategSelect()");
+            V.renderAge_restriction();
+            V.render_cherch_bar();
+          }
+        });
 
-          V.renderCategorie_selector("C.handlerCategSelect()");
-          V.renderAge_restriction();
-          V.render_cherch_bar()
-        }
-      });
+      document
+        .querySelector("#filter_container")
+        .addEventListener("click", (event) => {
+          let closeButton = event.target.closest(".info__close_btn");
+          if (closeButton) {
+            window.scrollTo(0, 0);
+            let card_list = document.querySelector("#card__list");
+            card_list.innerHTML = "";
+            card_list.style.display = "grid";
+            let card_info = document.querySelector("#card__info_container");
+            card_info.innerHTML = "";
+            card_list.style.padding = "2rem";
+            let categorieSelector = document.querySelector(
+              ".categorie_selector"
+            );
+            categorieSelector.style.display = "flex";
+            categorieSelector.sty;
 
-
-      document.querySelector("#filter_container").addEventListener("click", (event) => {
-        let closeButton = event.target.closest(".info__close_btn");
-        if (closeButton) {
-          window.scrollTo(0, 0);
-          let card_list = document.querySelector("#card__list");
-          card_list.innerHTML = "";
-          card_list.style.display = "grid";
-          let card_info = document.querySelector("#card__info_container");
-          card_info.innerHTML = "";
-          card_list.style.padding = "2rem";
-          let categorieSelector = document.querySelector(".categorie_selector");
-          categorieSelector.style.display = "flex";
-          categorieSelector.sty;
-
-          V.renderCategorie_selector("C.handlerCategSelect()");
-          V.renderAge_restriction();
-          V.render_cherch_bar()
-        }
-      });
+            V.renderCategorie_selector("C.handlerCategSelect()");
+            V.renderAge_restriction();
+            V.render_cherch_bar();
+          }
+        });
 
       const pageDeConnexion = document.querySelector("#page_de_connexion");
       document.body.classList.add("no-scroll");
       pageDeConnexion.classList.remove("hidden");
-      document.querySelector("#page_de_connexion").addEventListener("click", async (event) => {
-        const target = event.target.closest(".profil");
-        if (target) {
-          const profilId = target.getAttribute("id");
-          const profil = await DataMovie.getunprofil(profilId);
-          V.renderNavBar(profil);
-          V.renderCategorie_selector("C.handlerCategSelect()");
-          V.renderAge_restriction();
-          V.render_cherch_bar();
-          pageDeConnexion.classList.add("hidden");
-          document.body.classList.remove("no-scroll");
-        }
-      });
-
-      document.querySelector("#card__list").addEventListener("click", (event) => {
-        const target = event.target.closest(".favoris_star");
-        if (target) {
-          let id_carte = target.closest(".carte").getAttribute("id");
-          let id_user = document
-            .querySelector(".profil--navbar")
-            .getAttribute("id");
-          if (target.src.includes("star_notactive.svg")) {
-            target.src = "../assets/images/star_active.svg";
-            target.style.backgroundColor = "var(--color-white)";
-            DataMovie.addFavoris(id_user, id_carte);
-          } else {
-            target.src = "../assets/images/star_notactive.svg";
-            target.style.backgroundColor = "var(--color-yellow)";
-            DataMovie.delFavoris(id_user, id_carte);
+      document
+        .querySelector("#page_de_connexion")
+        .addEventListener("click", async (event) => {
+          const target = event.target.closest(".profil");
+          if (target) {
+            const profilId = target.getAttribute("id");
+            const profil = await DataMovie.getunprofil(profilId);
+            V.renderNavBar(profil);
+            V.renderCategorie_selector("C.handlerCategSelect()");
+            V.renderAge_restriction();
+            V.render_cherch_bar();
+            pageDeConnexion.classList.add("hidden");
+            document.body.classList.remove("no-scroll");
           }
-        }
-      });
+        });
 
-
-      document.querySelector("#mis_en_avant").addEventListener("click", (event) => {
-        const target = event.target.closest(".favoris_star");
-        if (target) {
-          let id_carte = target.closest(".carte").getAttribute("id");
-          let id_user = document
-            .querySelector(".profil--navbar")
-            .getAttribute("id");
-          if (target.src.includes("star_notactive.svg")) {
-            target.src = "../assets/images/star_active.svg";
-            target.style.backgroundColor = "var(--color-white)";
-            DataMovie.addFavoris(id_user, id_carte);
-          } else {
-            target.src = "../assets/images/star_notactive.svg";
-            target.style.backgroundColor = "var(--color-yellow)";
-            DataMovie.delFavoris(id_user, id_carte);
+      document
+        .querySelector("#card__list")
+        .addEventListener("click", (event) => {
+          const target = event.target.closest(".favoris_star");
+          if (target) {
+            let id_carte = target.closest(".carte").getAttribute("id");
+            let id_user = document
+              .querySelector(".profil--navbar")
+              .getAttribute("id");
+            if (target.src.includes("star_notactive.svg")) {
+              target.src = "../assets/images/star_active.svg";
+              target.style.backgroundColor = "var(--color-white)";
+              DataMovie.addFavoris(id_user, id_carte);
+            } else {
+              target.src = "../assets/images/star_notactive.svg";
+              target.style.backgroundColor = "var(--color-yellow)";
+              DataMovie.delFavoris(id_user, id_carte);
+            }
           }
-        }
-      });
+        });
 
-      
+      document
+        .querySelector("#mis_en_avant")
+        .addEventListener("click", (event) => {
+          const target = event.target.closest(".favoris_star");
+          if (target) {
+            let id_carte = target.closest(".carte").getAttribute("id");
+            let id_user = document
+              .querySelector(".profil--navbar")
+              .getAttribute("id");
+            if (target.src.includes("star_notactive.svg")) {
+              target.src = "../assets/images/star_active.svg";
+              target.style.backgroundColor = "var(--color-white)";
+              DataMovie.addFavoris(id_user, id_carte);
+            } else {
+              target.src = "../assets/images/star_notactive.svg";
+              target.style.backgroundColor = "var(--color-yellow)";
+              DataMovie.delFavoris(id_user, id_carte);
+            }
+          }
+        });
+
       document.querySelector("#header").addEventListener("click", (event) => {
         let FavorisButton = event.target.closest(".favoris_profil");
         if (FavorisButton) {
@@ -395,14 +402,17 @@
         }
       });
 
-      document.querySelector("#cherchbar_container").addEventListener("input", function (event) {
-        let age = document.querySelector(".restriction_profil--navbar").getAttribute("id")
-        const query = event.target.value;
-        let card_list = document.querySelector("#card__list");
-        card_list.innerHTML = "";
-        V.renderAllfilm_cherch(age, query)
-        
-      });
+      document
+        .querySelector("#cherchbar_container")
+        .addEventListener("input", function (event) {
+          let age = document
+            .querySelector(".restriction_profil--navbar")
+            .getAttribute("id");
+          const query = event.target.value;
+          let card_list = document.querySelector("#card__list");
+          card_list.innerHTML = "";
+          V.renderAllfilm_cherch(age, query);
+        });
       C.start();
     </script>
   </body>

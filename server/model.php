@@ -258,8 +258,6 @@ function getAllFilm_char($age, $char) {
 }
 
 
-
-
 function getAllFilmFavoris_char($id_profil, $char) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -278,4 +276,52 @@ function getAllFilmFavoris_char($id_profil, $char) {
     ]);
 
     return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
+//strtolower et LOWER => pour mettre en minuscule
+
+function getAllFilm_char_forForm($char) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $char = strtolower($char);
+    
+    // Requête modifiée pour inclure les films "En_avant"
+    $sql = "SELECT Movie.*, En_avant.id_film AS en_avant
+            FROM Movie
+            LEFT JOIN En_avant ON Movie.id = En_avant.id_film
+            WHERE LOWER(Movie.name) LIKE :char";
+
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute([
+        ':char' => '%' . $char . '%'
+    ]);
+
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
+function add_Avant($liste_id_film_add_avant) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    if (!empty($liste_id_film_add_avant)) {
+        foreach ($liste_id_film_add_avant as $id_film) {
+            $sql_add = "INSERT IGNORE INTO En_avant (id_film) VALUES (:id_film)";
+            $stmt = $cnx->prepare($sql_add);
+            $stmt->bindParam(':id_film', $id_film, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+    }
+    return $stmt->rowCount();
+}
+
+
+function del_Avant($liste_id_film_del_avant) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    if (!empty($liste_id_film_del_avant)) {
+        foreach ($liste_id_film_del_avant as $id_film) {
+            $sql_del = "DELETE FROM En_avant WHERE id_film = :id_film";
+            $stmt = $cnx->prepare($sql_del);
+            $stmt->bindParam(':id_film', $id_film, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+    }
+    return $stmt->rowCount();
 }

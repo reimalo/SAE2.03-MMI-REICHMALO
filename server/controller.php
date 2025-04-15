@@ -182,3 +182,29 @@ function read_enAvantController(){
     $film_list = getAllFilmEnAvant($age);
     return $film_list;
 }
+
+function read_forFormController(){
+    $char = $_REQUEST['char'];
+    $film_list = getAllFilm_char_forForm($char);
+    return $film_list;
+}
+
+function add_AvantController(){
+    $liste_id_film_add_avant = $_REQUEST['liste_id_film_add_avant'];
+    $ok = add_Avant($liste_id_film_add_avant);
+    if ($ok != 0) {
+        return "Le ou les film on été ajouté ou retiré";
+    } else {
+        return "Erreur, le profil n'a pas été ajouté";
+    }
+}
+
+function del_AvantController(){
+    $liste_id_film_del_avant =  $_REQUEST['liste_id_film_del_avant'];
+    $ok = add_Avant($liste_id_film_del_avant);
+    if ($ok != 0) {
+        return "Le ou les film on été ajouté ou retiré";
+    } else {
+        return "Erreur, le profil n'a pas été ajouté";
+    }
+}
