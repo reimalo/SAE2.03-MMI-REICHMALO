@@ -246,15 +246,14 @@ function getAllFilm_char($age, $char) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
 
     $char = strtolower($char);
-    $sql = "SELECT * FROM Movie WHERE min_age <= $age";
+    $sql = "SELECT * FROM Movie WHERE min_age <= :age AND LOWER(name) LIKE :char";
 
-    // Ajoute un AND name LIKE '%x%' pour chaque lettre
-    for ($i = 0; $i < strlen($char); $i++) {
-        $letter = $char[$i];
-        $sql .= " AND LOWER(name) LIKE '%$letter%'";
-    }
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute([
+        ':age' => $age,
+        ':char' => '%' . $char . '%'
+    ]);
 
-    $stmt = $cnx->query($sql);
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
@@ -263,19 +262,20 @@ function getAllFilm_char($age, $char) {
 
 function getAllFilmFavoris_char($id_profil, $char) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $char = strtolower($char);
     $sql = "SELECT Movie.* 
             FROM Favoris 
             JOIN Movie ON Favoris.id_film = Movie.id 
-            WHERE Favoris.id_profil = $id_profil";
+            WHERE Favoris.id_profil = :id_profil 
+            AND LOWER(Movie.name) LIKE :char";
 
-    for ($i = 0; $i < strlen($char); $i++) {
-        $letter = $char[$i];
-        $sql .= " AND LOWER(Movie.name) LIKE '%$letter%'";
-    }
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute([
+        ':id_profil' => $id_profil,
+        ':char' => '%' . $char . '%'
+    ]);
 
-    $stmt = $cnx->query($sql);
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
-

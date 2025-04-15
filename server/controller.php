@@ -11,7 +11,7 @@ function readController(){
             $film_list = getAllFilmFavoris_char($id, $char);
         }
         else{
-            $film_list = getAllFilm_char($age);
+            $film_list = getAllFilm_char($age, $char);
         }
     }
     else{
