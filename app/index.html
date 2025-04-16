@@ -55,6 +55,8 @@
         let card_info = document.querySelector("#card__info_container");
         card_info.innerHTML = "";
         card.style.display = "grid";
+        let cherch = document.querySelector("#cherchbar_container");
+        cherch.innerHTML = "";
 
         if (res.length === 0) {
           card.innerHTML =
@@ -68,6 +70,7 @@
             ".restriction_profil--navbar"
           );
           let age = profil_choisi.getAttribute("id");
+          V.render_cherch_bar();
           V.render_EnAvant(age);
         }
 
