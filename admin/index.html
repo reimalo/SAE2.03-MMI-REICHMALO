@@ -35,9 +35,10 @@
       C.start = function () {
         showPopup("Démarrage de l'application");
         V.renderNewFilm("C.handleradd_film()");
-        V.renderNewAvant("C.handleradd_Avant()");
+        V.renderNewAvant();
         V.renderCherchbar();
         initCherchBarEvents();
+        setupCarteCheckboxListener();
         V.renderNavBar();
       };
 
@@ -110,16 +111,10 @@
 
       function showPopup(message) {
         const popupContainer = document.getElementById("popup-container");
-
-        // Crée un élément pop-up
         const popup = document.createElement("div");
         popup.className = "popup";
         popup.textContent = message;
-
-        // Ajoute le pop-up au conteneur
         popupContainer.appendChild(popup);
-
-        // Supprime le pop-up après 5 secondes
         setTimeout(() => {
           popup.remove();
         }, 5000);
@@ -128,9 +123,10 @@
         .querySelector(".menu__item--film")
         .addEventListener("click", async () => {
           V.renderNewFilm("C.handleradd_film()");
-          V.renderNewAvant("C.handleradd_Avant()");
+          V.renderNewAvant();
           V.renderCherchbar();
           initCherchBarEvents();
+          setupCarteCheckboxListener();
         });
 
       document
@@ -149,13 +145,21 @@
         });
       }
 
-      function setupCarteCheckboxListener() {
+      async function setupCarteCheckboxListener() {
         const container = document.querySelector(".fiml_cherch_container");
-        container.addEventListener("click", (event) => {
-          const target = event.target.closest("#checkbox");
-          const carte = target.closest(".carte");
-          const id_carte = carte.getAttribute("id");
-          DataMovie.add_Avant(id_carte);
+        container.addEventListener("change", async (event) => {
+          const target = event.target;
+          if (target.classList.contains("checkbox-avant")) {
+            const carte = target.closest(".carte");
+            const id_carte = carte.getAttribute("id");
+            let res;
+            if (target.checked) {
+              res = await DataMovie.add_Avant(id_carte);
+            } else {
+              res = await DataMovie.del_Avant(id_carte);
+            }
+            showPopup(res);
+          }
         });
       }
 

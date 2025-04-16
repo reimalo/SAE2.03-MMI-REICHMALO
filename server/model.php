@@ -299,29 +299,21 @@ function getAllFilm_char_forForm($char) {
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
-function add_Avant($liste_id_film_add_avant) {
+function add_Avant($id_film_add_avant) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-    if (!empty($liste_id_film_add_avant)) {
-        foreach ($liste_id_film_add_avant as $id_film) {
-            $sql_add = "INSERT IGNORE INTO En_avant (id_film) VALUES (:id_film)";
-            $stmt = $cnx->prepare($sql_add);
-            $stmt->bindParam(':id_film', $id_film, PDO::PARAM_INT);
-            $stmt->execute();
-        }
-    }
+    $sql_add = "INSERT INTO En_avant (id_film) VALUES (:id_film)";
+    $stmt = $cnx->prepare($sql_add);
+    $stmt->bindParam(':id_film', $id_film_add_avant, PDO::PARAM_INT);
+    $stmt->execute();
     return $stmt->rowCount();
 }
 
 
-function del_Avant($liste_id_film_del_avant) {
+function del_Avant($id_film_del_avant) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-    if (!empty($liste_id_film_del_avant)) {
-        foreach ($liste_id_film_del_avant as $id_film) {
-            $sql_del = "DELETE FROM En_avant WHERE id_film = :id_film";
-            $stmt = $cnx->prepare($sql_del);
-            $stmt->bindParam(':id_film', $id_film, PDO::PARAM_INT);
-            $stmt->execute();
-        }
-    }
+    $sql_del = "DELETE FROM En_avant WHERE id_film = :id_film";
+    $stmt = $cnx->prepare($sql_del);
+    $stmt->bindParam(':id_film', $id_film_del_avant, PDO::PARAM_INT);
+    $stmt->execute();
     return $stmt->rowCount();
 }

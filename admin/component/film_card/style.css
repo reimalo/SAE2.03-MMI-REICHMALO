@@ -1,5 +1,6 @@
 .carte {
     min-width: 15rem;
+    max-width: 16rem;
     border: 0.0625rem solid var(--color-gray-light);
     border-radius: 0.75rem;
     margin-block: 1rem;

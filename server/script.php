@@ -105,6 +105,10 @@ if ( isset($_REQUEST['todo']) ){
       $data = add_AvantController();
       break;
 
+    case 'del_Avant':
+      $data = del_AvantController();
+      break;
+
 
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée
       echo json_encode('[error] Unknown todo value');
