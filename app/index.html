@@ -253,8 +253,6 @@
             let info_film = await DataMovie.info(filmId);
             let avant_title = document.querySelector("#title_container-avant");
             let avant_enAvant = document.querySelector("#mis_en_avant");
-            let cherch = document.querySelector("#cherchbar_container");
-            cherch.innerHTML = "";
             avant_title.innerHTML = "";
             avant_enAvant.innerHTML = "";
             V.renderInfo_film(info_film);
@@ -297,6 +295,7 @@
               ".categorie_selector"
             );
             categorieSelector.style.display = "flex";
+            categorieSelector.sty;
 
             V.renderCategorie_selector("C.handlerCategSelect()");
             V.renderAge_restriction();
