@@ -1,0 +1,34 @@
+<div class="header-fond">
+  <video class="video_header" autoplay muted loop>
+    <source src="../assets/video/Inception.mp4" type="video/mp4" />
+  </video>
+  <nav class="navbar">
+    <img class="logo logo--navbar" src="../assets/images/mubi.png" alt="Logo" />
+    <ul class="navbar__list">
+      <li class="navbar__item navbar__item--profil navbar__item--invisible">
+        <button onclick="location.reload()" class="deconnexion">
+          <img class="logout_image" src="../assets/images/logout.svg" />
+        </button>
+      </li>
+      <li class="navbar__item navbar__profil--invisible navbar__item--profil">
+        <ul id="{{id}}" class="profil--navbar">
+          <li>
+            <img class="img_profil-sel--navbar" src="{{chemin}}" alt="" />
+          </li>
+          <li>
+            <h1 class="titre_profil--navbar">{{name}}</h1>
+          </li>
+          <li>
+            <p id="{{Age_id}}" class="restriction_profil--navbar">
+              <span class="restriction_title--navbar">Age :</span>
+              {{Age}}
+            </p>
+          </li>
+          <li>
+            <img class="favoris_profil" src="../assets/images/star_active" />
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>

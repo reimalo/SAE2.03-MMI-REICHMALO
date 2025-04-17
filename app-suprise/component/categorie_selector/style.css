@@ -1,0 +1,65 @@
+.categorie_selector {
+    display: flex;
+    padding-top: 1rem;
+    padding-left: 1rem;
+}
+
+.categorie__form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.categorie__form select {
+    background-color: var( --color-gray-dark);
+    font-size: 1rem;
+    padding: 0.8rem;
+    border: 0;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    color: var(--color-white);
+}
+
+
+
+.categorie__form input[type="button"] {
+    color: var(--color-black); 
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+
+.categorie__form input[type="button"]:hover {
+    background-color: #008fcc; /* Couleur plus foncée au survol */
+    transform: scale(1.05);
+}
+
+/* Effet au clic du bouton */
+.categorie__form input[type="button"]:active {
+    transform: scale(0.95); /* Légère réduction au clic */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .categorie_selector {
+        padding: 1rem;
+    }
+
+    .categorie__form {
+        flex-direction: column; /* Les éléments passent en colonne */
+        gap: 0.8rem;
+    }
+
+    .categorie__form select,
+    .categorie__form input[type="button"] {
+        width: 100%; /* Les éléments occupent toute la largeur */
+    }
+}

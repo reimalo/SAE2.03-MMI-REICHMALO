@@ -1,0 +1,28 @@
+<div class="film_info">
+  <div class="info__close">
+    <button class="info__close_btn" id="close_btn">
+      <img
+        class="img_bouton_close"
+        src="../assets/images/close.png"
+        alt="Close"
+      />
+    </button>
+  </div>
+  <img class="info__img" src="{{image}}" alt="Film Poster" />
+  <div class="info__txt_container">
+    <h1 class="info__txt">{{name}}</h1>
+    <p class="info__txt">Genre: {{categorie}}</p>
+    <p class="info__txt">Réalisateur: {{director}}</p>
+    <p class="info__txt">Date de sortie: {{year}}</p>
+    <p class="info__txt">{{description}}</p>
+    <p class="info__txt">Recommendation d'âge: {{min_age}}</p>
+  </div>
+  <iframe
+    class="info__video"
+    src="{{trailer}}"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  >
+  </iframe>
+</div>

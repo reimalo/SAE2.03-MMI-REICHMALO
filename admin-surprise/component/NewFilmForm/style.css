@@ -1,0 +1,134 @@
+.addFilm {
+    width: 90%;
+    max-width: 40rem;
+    margin: 2rem auto;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #1f1f1f 0%, #2c2c2c 100%);
+    border-radius: 1rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+}
+
+.addFilm__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #f0f0f0;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.addFilm__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.addFilm__form input{
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 1rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.addFilm__form select {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #000000;
+    font-size: 1rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.addFilm__form input::placeholder {
+    color: #ccc;
+}
+
+.addFilm__form input:focus {
+    border: 1px solid #00bfff;
+    box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--color-white);
+}
+
+.addFilm__form select:focus {
+    border: 1px solid #00bfff;
+    box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
+    outline: none;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+.addFilm__form input[type="button"] {
+    background: linear-gradient(135deg, #00bfff, #1e90ff);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+}
+
+.addFilm__form input[type="button"]:hover {
+    background: linear-gradient(135deg, #009acd, #00688b);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 191, 255, 0.4);
+}
+
+.addFilm__form input[type="button"]:active {
+    transform: scale(0.97);
+}
+
+.addFilm__form input[type="file"] {
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 0.5rem;
+    color: #fff;
+    border: none;
+    width: 100%;
+    /* S'assure que l'élément occupe toute la largeur */
+    margin-bottom: 0.5rem;
+    /* Ajoute un espace sous l'élément */
+}
+
+.addFilm__form select {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .addFilm {
+        padding: 2rem;
+    }
+
+    .addFilm__title {
+        font-size: 1.5rem;
+    }
+
+    .addFilm__form input,
+    .addFilm__form select {
+        font-size: 0.95rem;
+        padding: 0.8rem;
+    }
+
+    .addFilm__form input[type="button"] {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+}

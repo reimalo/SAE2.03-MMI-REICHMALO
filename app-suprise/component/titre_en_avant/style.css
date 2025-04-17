@@ -1,0 +1,31 @@
+.titre_en_avant{
+    margin-top: 1.5rem;
+    margin-left: 1rem;
+    margin-right: 0.5rem;
+    color: var(--color-black);
+    font-size: 1rem;
+    font-family: var(--ff-reforma);
+}
+
+
+.arrow-1{
+    width: 0.4rem;
+    padding-top: 0.7rem;
+}
+
+.no-results-en-avant{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.image_no_en_avant{
+    width: 20rem;
+}
+
+
+@media (min-width: 768px) {
+    .image_no_en_avant{
+        width: 40rem;
+    }
+}

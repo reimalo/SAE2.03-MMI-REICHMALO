@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>MUBI</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/base.css" />
+  </head>
+
+  <body>
+    <section id="page_de_connexion"></section>
+    <header id="header"></header>
+    <section id="title_container-avant"></section>
+    <section id="mis_en_avant"></section>
+    <section id="filter_container"></section>
+    <section id="cherchbar_container"></section>
+    <section id="card__list"></section>
+    <section id="card__info_container"></section>
+    <footer id="footer"></footer>
+
+    <script type="module">
+      import { NavBar } from "./component/NavBar/script.js";
+      import { film_card } from "./component/film_card/script.js";
+      import { DataMovie } from "./data/dataMovie.js";
+      import { film_info } from "./component/film_info/script.js";
+      import { categorie_selectorForm } from "./component/categorie_selector/script.js";
+      import { profil_selector } from "./component/profil_selector/script.js";
+      import { profil_selector_container } from "./component/profil_selector_container/script.js";
+      import { filtre_age } from "./component/age_filter/script.js";
+      import { film_favoris } from "./component/film_favoris/script.js";
+      import { titre_en_avant } from "./component/titre_en_avant/script.js";
+      import { film_card_en_avant } from "./component/film_card_en_avant/script.js";
+      import { cherch_bar } from "./component/cherch_bar/script.js";
+      import { footer } from "./component/footer/script.js";
+
+      window.C = {};
+      DataMovie.info;
+      C.start = function () {
+        V.renderNavBar("");
+        V.renderAllprofil();
+        V.renderFoter();
+      };
+
+      C.handlerCategSelect = async function () {
+        let form = document.querySelector(".categorie__form");
+        let fd = new FormData(form);
+        let category = fd.get("categorie");
+        let profil_choisi = document.querySelector(
+          ".restriction_profil--navbar"
+        );
+        let age = profil_choisi.getAttribute("id");
+        let res = await DataMovie.categorie(category, age);
+        let avant_title = document.querySelector("#title_container-avant");
+        let avant_enAvant = document.querySelector("#mis_en_avant");
+        avant_title.innerHTML = "";
+        avant_enAvant.innerHTML = "";
+        let card = document.querySelector("#card__list");
+        card.innerHTML = "";
+        let card_info = document.querySelector("#card__info_container");
+        card_info.innerHTML = "";
+        let cherch = document.querySelector("#cherchbar_container");
+        cherch.innerHTML = "";
+
+        if (res.length === 0) {
+          card.innerHTML =
+            '<div class="no-results"><img src="../assets/images/Group 4.svg" alt="Aucune donnée disponible" /></div>';
+          card.style.display = "flex";
+          card.style.justifyContent = "center";
+        }
+
+        if (category == "none") {
+          let profil_choisi = document.querySelector(
+            ".restriction_profil--navbar"
+          );
+          let age = profil_choisi.getAttribute("id");
+          V.render_cherch_bar();
+          V.render_EnAvant(age);
+        }
+
+        res.forEach((film) => {
+          V.renderfilm_card(film);
+        });
+      };
+      window.V = {};
+
+      V.renderNavBar = function (profil) {
+        let header = document.querySelector("#header");
+        header.innerHTML = NavBar.format(profil);
+      };
+
+      V.renderfilm_card = async function (data) {
+        let profilNavbar = document.querySelector(".profil--navbar");
+        if (!profilNavbar) {
+          console.error("L'élément .profil--navbar n'est pas encore chargé.");
+          return;
+        }
+        let id_user = profilNavbar.getAttribute("id");
+        let favoris_icon = await DataMovie.getFavoris(id_user);
+        if (!Array.isArray(favoris_icon)) {
+          console.error("Les favoris n'ont pas pu être chargés.");
+          return;
+        }
+        let card = document.querySelector("#card__list");
+        card.innerHTML += film_card.format(data, favoris_icon);
+      };
+
+      V.renderfilm_card_enAvant = async function (data) {
+        let profilNavbar = document.querySelector(".profil--navbar");
+        if (!profilNavbar) {
+          console.error("L'élément .profil--navbar n'est pas encore chargé.");
+          return;
+        }
+        let id_user = profilNavbar.getAttribute("id");
+        let favoris_icon = await DataMovie.getFavoris(id_user);
+        if (!Array.isArray(favoris_icon)) {
+          console.error("Les favoris n'ont pas pu être chargés.");
+          return;
+        }
+        let card = document.querySelector("#mis_en_avant");
+        card.innerHTML += film_card_en_avant.format(data, favoris_icon);
+      };
+
+      V.renderProfil_selector_container = function () {
+        let content = document.querySelector("#page_de_connexion");
+        content.innerHTML = profil_selector_container.format();
+      };
+
+      V.renderProfil_selector = function (handler) {
+        V.renderProfil_selector_container();
+        setTimeout(() => {
+          let content = document.querySelector("#profil_menu");
+          if (content) {
+            content.innerHTML += profil_selector.format(handler);
+          }
+        }, 0); // Délai pour permettre a la DOM de se mettre à jour
+      };
+
+      V.renderCategorie_selector = function (handler) {
+        let content = document.querySelector("#filter_container");
+        content.innerHTML = categorie_selectorForm.format(handler);
+      };
+
+      V.renderAllfilm = async function (age) {
+        let card = document.querySelector("#card__list");
+        let datafilm = await DataMovie.request(age);
+        if (datafilm.length === 0) {
+          card.innerHTML =
+            '<div class="no-results"><img src="../assets/images/Group 4.svg" alt="Aucune donnée disponible" /></div>';
+          card.style.display = "flex";
+          card.style.justifyContent = "center";
+        }
+        datafilm.forEach((film) => {
+          V.renderfilm_card(film);
+        });
+      };
+
+      V.renderAllprofil = async function () {
+        let dataProfil = await DataMovie.getprofil();
+        dataProfil.forEach((profil) => {
+          V.renderProfil_selector(profil);
+        });
+      };
+
+      V.renderAge_restriction = async function () {
+        let profil_choisi = document.querySelector(
+          ".restriction_profil--navbar"
+        );
+        let age = profil_choisi.getAttribute("id");
+        let card = document.querySelector(".categorie_selector");
+        card.innerHTML += filtre_age.format(age);
+
+        V.renderAllfilm(age);
+        V.render_EnAvant(age);
+      };
+
+      V.renderInfo_film = function (data) {
+        let info = document.querySelector("#card__info_container");
+
+        let card_list_sup = document.querySelector("#card__list");
+        let categorieSelector = document.querySelector(".categorie_selector");
+        card_list_sup.innerHTML = "";
+        if (categorieSelector) {
+          categorieSelector.style.display = "none";
+        }
+        card_list_sup.style.padding = "0";
+        info.innerHTML = film_info.format(data);
+      };
+
+      V.renderAllFavorisFilm = async function (id) {
+        let card = document.querySelector("#card__list");
+        let datafilm = await DataMovie.request("", id);
+        if (datafilm.length === 0) {
+          card.innerHTML =
+            '<div class="no-results"><img src="../assets/images/Group 4.svg" alt="Aucune donnée disponible" /></div>';
+          card.style.display = "flex";
+          card.style.justifyContent = "center";
+        }
+        datafilm.forEach((film) => {
+          V.renderfilm_card(film);
+        });
+      };
+
+      V.renderHeader_favoris = async function () {
+        let card_list = document.querySelector("#card__list");
+        card_list.innerHTML = "";
+        let categorieSelector = document.querySelector(".categorie_selector");
+        categorieSelector.style.display = "none";
+        let filter = document.querySelector("#filter_container");
+        filter.innerHTML += film_favoris.format();
+      };
+
+      V.render_EnAvant = async function (age) {
+        let card = document.querySelector("#mis_en_avant");
+        let titre = document.querySelector("#title_container-avant");
+        titre.innerHTML = titre_en_avant.format();
+        let datafilm = await DataMovie.request_enAvant(age);
+        if (datafilm.length === 0) {
+          card.innerHTML +=
+            '<div class="no-results-en-avant"><img class="image_no_en_avant" src="../assets/images/no_avant.svg" alt="Aucun film en avant" /></div>';
+
+          card.style.display = "flex";
+          card.style.justifyContent = "center";
+        }
+        datafilm.forEach((film) => {
+          V.renderfilm_card_enAvant(film);
+        });
+      };
+
+      V.render_cherch_bar = async function () {
+        let selector = document.querySelector("#cherchbar_container");
+        selector.innerHTML += cherch_bar.format();
+      };
+
+      V.renderAllfilm_cherch = async function (age, char) {
+        let card = document.querySelector("#card__list");
+        let datafilm = await DataMovie.request(age, "", char);
+        if (datafilm.length === 0) {
+          card.innerHTML =
+            '<div class="no-results"><img src="../assets/images/Group 4.svg" alt="Aucune donnée disponible" /></div>';
+          card.style.display = "flex";
+          card.style.justifyContent = "center";
+        }
+        datafilm.forEach((film) => {
+          V.renderfilm_card(film);
+        });
+      };
+
+      V.renderFoter = function () {
+        let footer_selector = document.querySelector("#footer");
+        footer_selector.innerHTML = footer.format();
+      };
+
+      document
+        .querySelector("#card__list")
+        .addEventListener("click", async (event) => {
+          let target_parent = event.target.closest(".carte");
+          let target =
+            event.target.closest(".cart__img") || event.target.closest(".info");
+          if (target) {
+            let filmId = target_parent.getAttribute("id");
+            let info_film = await DataMovie.info(filmId);
+            let avant_title = document.querySelector("#title_container-avant");
+            let avant_enAvant = document.querySelector("#mis_en_avant");
+            let cherch = document.querySelector("#cherchbar_container");
+            cherch.innerHTML = "";
+            avant_title.innerHTML = "";
+            avant_enAvant.innerHTML = "";
+            V.renderInfo_film(info_film);
+          }
+        });
+
+      document
+        .querySelector("#mis_en_avant")
+        .addEventListener("click", async (event) => {
+          let target_parent = event.target.closest(".carte_en_avant");
+          let target =
+            event.target.closest(".info_en_avant") ||
+            event.target.closest(".cart__img_en_avant");
+          if (target) {
+            let filmId = target_parent.getAttribute("id");
+            let info_film = await DataMovie.info(filmId);
+            let avant_title = document.querySelector("#title_container-avant");
+            let avant_enAvant = document.querySelector("#mis_en_avant");
+            avant_title.innerHTML = "";
+            avant_enAvant.innerHTML = "";
+            let cherch = document.querySelector("#cherchbar_container");
+            cherch.innerHTML = "";
+            V.renderInfo_film(info_film);
+          }
+        });
+
+      document
+        .querySelector("#card__info_container")
+        .addEventListener("click", (event) => {
+          let closeButton = event.target.closest(".info__close_btn");
+          if (closeButton) {
+            window.scrollTo(0, 0);
+            let card_list = document.querySelector("#card__list");
+            card_list.innerHTML = "";
+            let card_info = document.querySelector("#card__info_container");
+            card_info.innerHTML = "";
+            card_list.style.padding = "2rem";
+            let categorieSelector = document.querySelector(
+              ".categorie_selector"
+            );
+            categorieSelector.style.display = "flex";
+            V.renderCategorie_selector("C.handlerCategSelect()");
+            V.renderAge_restriction();
+            V.render_cherch_bar();
+          }
+        });
+
+      document
+        .querySelector("#filter_container")
+        .addEventListener("click", (event) => {
+          let closeButton = event.target.closest(".info__close_btn");
+          if (closeButton) {
+            window.scrollTo(0, 0);
+            let card_list = document.querySelector("#card__list");
+            card_list.innerHTML = "";
+            let card_info = document.querySelector("#card__info_container");
+            card_info.innerHTML = "";
+            card_list.style.padding = "2rem";
+            let categorieSelector = document.querySelector(
+              ".categorie_selector"
+            );
+            categorieSelector.style.display = "flex";
+            categorieSelector.sty;
+
+            V.renderCategorie_selector("C.handlerCategSelect()");
+            V.renderAge_restriction();
+            V.render_cherch_bar();
+          }
+        });
+
+      const pageDeConnexion = document.querySelector("#page_de_connexion");
+      pageDeConnexion.classList.remove("hidden");
+      document
+        .querySelector("#page_de_connexion")
+        .addEventListener("click", async (event) => {
+          const target = event.target.closest(".profil");
+          if (target) {
+            const profilId = target.getAttribute("id");
+            const profil = await DataMovie.getunprofil(profilId);
+            V.renderNavBar(profil);
+            V.renderCategorie_selector("C.handlerCategSelect()");
+            V.renderAge_restriction();
+            V.render_cherch_bar();
+            pageDeConnexion.classList.add("hidden");
+          }
+        });
+
+      document
+        .querySelector("#card__list")
+        .addEventListener("click", (event) => {
+          const target = event.target.closest(".favoris_star");
+          if (target) {
+            let id_carte = target.closest(".carte").getAttribute("id");
+            let id_user = document
+              .querySelector(".profil--navbar")
+              .getAttribute("id");
+            if (target.src.includes("star_notactive.svg")) {
+              target.src = "../assets/images/star_active.svg";
+              target.style.backgroundColor = "var(--color-white)";
+              DataMovie.addFavoris(id_user, id_carte);
+            } else {
+              target.src = "../assets/images/star_notactive.svg";
+              target.style.backgroundColor = "var(--color-yellow)";
+              DataMovie.delFavoris(id_user, id_carte);
+            }
+          }
+        });
+
+      document
+        .querySelector("#mis_en_avant")
+        .addEventListener("click", (event) => {
+          const target = event.target.closest(".favoris_star");
+          if (target) {
+            let id_carte = target.closest(".carte").getAttribute("id");
+            let id_user = document
+              .querySelector(".profil--navbar")
+              .getAttribute("id");
+            if (target.src.includes("star_notactive.svg")) {
+              target.src = "../assets/images/star_active.svg";
+              target.style.backgroundColor = "var(--color-white)";
+              DataMovie.addFavoris(id_user, id_carte);
+            } else {
+              target.src = "../assets/images/star_notactive.svg";
+              target.style.backgroundColor = "var(--color-yellow)";
+              DataMovie.delFavoris(id_user, id_carte);
+            }
+          }
+        });
+
+      document.querySelector("#header").addEventListener("click", (event) => {
+        let FavorisButton = event.target.closest(".favoris_profil");
+        if (FavorisButton) {
+          let id_user = document
+            .querySelector(".profil--navbar")
+            .getAttribute("id");
+          let avant_title = document.querySelector("#title_container-avant");
+          let avant_enAvant = document.querySelector("#mis_en_avant");
+          let cherch = document.querySelector("#cherchbar_container");
+          cherch.innerHTML = "";
+          avant_title.innerHTML = "";
+          avant_enAvant.innerHTML = "";
+          V.renderHeader_favoris();
+          V.renderAllFavorisFilm(id_user);
+        }
+      });
+
+      document
+        .querySelector("#cherchbar_container")
+        .addEventListener("input", function (event) {
+          let age = document
+            .querySelector(".restriction_profil--navbar")
+            .getAttribute("id");
+          const query = event.target.value;
+          let card_list = document.querySelector("#card__list");
+          card_list.innerHTML = "";
+          V.renderAllfilm_cherch(age, query);
+        });
+      C.start();
+    </script>
+  </body>
+</html>

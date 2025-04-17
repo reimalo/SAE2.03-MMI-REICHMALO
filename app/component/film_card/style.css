@@ -3,11 +3,8 @@
     display: grid;
     background-color: var(--color-fond-1);
     grid-template-columns: repeat(2, 45.5%);
-    /* 2 colonnes */
     grid-auto-rows: 20rem;
-    /* Hauteur des lignes */
     grid-gap: 2rem;
-    /* Espacement entre les éléments */
 
 }
 

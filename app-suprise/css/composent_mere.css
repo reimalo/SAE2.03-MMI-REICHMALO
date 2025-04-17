@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    background-color: var(--color-white);
+}
+
+
+#card__info_container{
+    padding: 2rem;
+}
+
+.no-results{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--ff-Minigap);
+    color: var(--color-white);
+    font-size: 2rem;
+}
+
+.no-results img{
+    width: 20rem;
+    height: 20rem;
+}
+
+#page_de_connexion{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    z-index: 1000;
+    padding-bottom: 2rem;
+    padding-inline: 1rem;
+    background-color: var(--color-white);
+    border-radius: 1.5rem;
+    border: 1px solid var(--color-fond-1);
+    color: var(--color-black);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+}
+
+#page_de_connexion.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+#mis_en_avant{
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    scrollbar-width: 2rem;
+    scrollbar-color: var(--color-white) transparent;
+}
+
+#cherchbar_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+#header{
+    position: relative;
+    padding-bottom: 25rem;
+    overflow: hidden;
+}
+
+#title_container-avant{
+    display: flex;
+}

@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700&display=swap");
+@import url("https://db.onlinewebfonts.com/c/cef2a781c1d82880efc0e8f641b08d98?family=Reforma+V1"); 
+@font-face {
+  font-family: 'Minigap';
+  src: url('../../assets/font/Minigap.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  /* Primitive Tokens */
+  --color-black: hsl(253, 69%, 8%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-gray-verylight: hsl(0, 0%, 91%);
+  --color-gray-light: hsl(0, 0%, 80%);
+  --color-gray: hsl(0, 0%, 50%);
+  --color-gray-dark: hsl(0, 0%, 20%);
+  --color-blue-1: rgb(45, 45, 143);
+  --color-ban-1: rgb(57, 40, 158);
+  --color-fond-1: rgb(44, 61, 110);
+  --color-fond-2: rgb(111, 147, 255);
+  --color-fond-carte: rgb(3, 14, 45);
+  --color-fond-btn: rgb(250, 42, 69);
+  --color-fond-btn-hold: rgb(127, 34, 34);
+  --color-yellow: rgb(255, 221, 51);
+  --color-yellow-orange: #fabb0d;
+  --ff-sans: "DM sans", sans-serif;
+  --ff-Minigap: "Minigap", sans-serif;
+  --ff-reforma: 'Riforma', Helvetica, Arial, 'Lucida Grande', sans-serif;
+
+
+  /* Sementic Tokens */
+  --color-fg: var(--color-white);
+  --color-bg: var(--color-gray-dark);
+}

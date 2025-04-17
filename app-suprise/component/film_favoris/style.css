@@ -1,0 +1,28 @@
+.film_favoris {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-family: var(--ff-reforma);
+  color: var(--color-black);
+  padding: 2rem;
+}
+
+.info_close_favoris{
+    position: static;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-bottom: 2rem;
+    background-color: transparent;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+@media (min-width: 768px) {
+    .film_favoris {
+        flex-direction: row;
+        align-items: center;
+      }
+}

@@ -1,0 +1,14 @@
+@layer reset, variables, components, utilities;
+
+@import "./reset.css" layer(reset);
+@import "./variables.css" layer(variables);
+@import "./utilities.css" layer(utilities);
+
+@import "../component/NavBar/style.css" layer(components);
+@import "../component/pop-up/style.css" layer(components);
+@import "../component/NewFilmForm/style.css" layer(components);
+@import "../component/NewProfilForm/style.css" layer(components);
+@import "../component/Mettre_en_avant/style.css" layer(components);
+@import "../component/cherch_bar/style.css" layer(components);
+@import "../component/film_card/style.css" layer(components);
+@import "./composent_mere.css" layer(components);

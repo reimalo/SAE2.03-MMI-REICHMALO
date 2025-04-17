@@ -1,0 +1,81 @@
+<div class="addFilm">
+  <h4 class="addFilm__title"># Ajouter un film</h4>
+  <form class="addFilm__form">
+    <input
+      required
+      type="text"
+      name="Titre"
+      placeholder="Titre du film"
+      pattern="[^0-9]*"
+      title="Numbers are not allowed"
+    />
+    <input
+      required
+      type="text"
+      name="Réalisateur"
+      placeholder="Réalisateur du film"
+      pattern="[^0-9]*"
+      title="Numbers are not allowed"
+    />
+    <input
+      required
+      type="text"
+      name="Année"
+      placeholder="Année de sortie"
+      pattern="[^0-9]*"
+      title="Numbers are not allowed"
+    />
+    <input
+      required
+      type="number"
+      name="Durée"
+      placeholder="Durée en minutes"
+      min="1"
+      title="Please enter a valid number"
+    />
+    <input
+      required
+      type="text"
+      name="Description"
+      placeholder="Description ou synopsis"
+      pattern="[^0-9]*"
+      title="Numbers are not allowed"
+    />
+    <select name="categorie">
+      <option value="Action">Action</option>
+      <option value="Comédie">Comédie</option>
+      <option value="Science-fiction">Science-fiction</option>
+      <option value="Animation">Animation</option>
+      <option value="Thriller">Thriller</option>
+      <option value="Horreur">Horreur</option>
+      <option value="Aventure">Aventure</option>
+      <option value="Fantaisie">Fantaisie</option>
+      <option value="Documentaire">Documentaire</option>
+    </select>
+
+    <input
+      required
+      type="file"
+      name="file"
+      accept=".jpg,.jpeg,.png,.gif"
+      title="Please upload an image file"
+    />
+    <input
+      required
+      type="text"
+      name="URL"
+      placeholder="URL du trailer"
+      pattern="[^0-9]*"
+      title="Numbers are not allowed"
+    />
+    <input
+      required
+      type="number"
+      name="Restrictions"
+      placeholder="Restrictions d'âge"
+      min="1"
+      title="Please enter a valid number"
+    />
+    <input onclick="{{handler}}" type="button" value="add" name="todo" />
+  </form>
+</div>

@@ -1,0 +1,16 @@
+.filtre_age{
+    height: 24%;
+    background-color: var(--color-yellow-orange);
+    font-size: 1rem;
+    padding-block: 0;
+    padding-inline: 0.8rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    font-family: var(--ff-reforma);
+    color: var(--color-white); 
+    margin-left: 2rem;
+}
+
+.filtre_age_text{
+    margin: 0.8rem;
+}

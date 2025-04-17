@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700&display=swap");
+
+:root {
+  /* Primitive Tokens */
+  --color-black: hsl(253, 69%, 8%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-gray-light: hsl(0, 0%, 80%);
+  --color-gray: hsl(0, 0%, 50%);
+  --color-gray-dark: hsl(0, 0%, 20%);
+  --color-green: hsl(122, 100%, 50%);
+  --color-blue-1: rgb(45, 45, 45);
+  --color-ban-1: rgb(45, 44, 51);
+  --color-fond-1: rgb(61, 61, 63);
+  --color-fond-carte: rgb(29, 30, 32);
+  --color-fond-menu: rgb(78, 87, 111);
+  
+
+  --ff-sans: "DM sans", sans-serif;
+  --ff-Minigap: "Minigap", sans-serif;
+
+  /* Sementic Tokens */
+  --color-fg: var(--color-white);
+  --color-bg: var(--color-gray-dark);
+  --color-accent: var(--color-green);
+}
