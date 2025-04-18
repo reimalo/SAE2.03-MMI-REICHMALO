@@ -29,6 +29,7 @@
       import { cherch_bar } from "./component/cherch_bar/script.js";
       import { film_card } from "./component/film_card/script.js";
       import { DataMovie } from "./data/dataMovie.js";
+      import { DataProfil } from "./data/dataProfile.js";
 
       window.C = {};
 
@@ -52,7 +53,7 @@
       C.handleradd_Profil = async function () {
         let form = document.querySelector(".addProfil__form");
         let fd = new FormData(form);
-        let res = await DataMovie.add_profil(fd);
+        let res = await DataProfil.add_profil(fd);
         showPopup(res); // Affiche le résultat dans un pop-up
       };
 
@@ -100,7 +101,7 @@
         let datafilm = await DataMovie.request_char(query);
         if (datafilm.length === 0) {
           card.innerHTML =
-            '<div class="no-results"><img src="../assets/images/Group 4.svg" alt="Aucune donnée disponible" /></div>';
+            '<div class="no-results"><img src="../assets/images/nodatamubi.svg" alt="Aucune donnée disponible" /></div>';
           card.style.display = "flex";
           card.style.justifyContent = "center";
         }

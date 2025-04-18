@@ -21,6 +21,7 @@
       import { NavBar } from "./component/NavBar/script.js";
       import { film_card } from "./component/film_card/script.js";
       import { DataMovie } from "./data/dataMovie.js";
+      import { DataProfile } from "./data/dataProfile.js";
       import { film_info } from "./component/film_info/script.js";
       import { categorie_selectorForm } from "./component/categorie_selector/script.js";
       import { profil_selector } from "./component/profil_selector/script.js";
@@ -31,7 +32,6 @@
       import { film_card_en_avant } from "./component/film_card_en_avant/script.js";
       import { cherch_bar } from "./component/cherch_bar/script.js";
       window.C = {};
-      DataMovie.info;
       C.start = function () {
         V.renderNavBar("");
         V.renderAllprofil();
@@ -92,7 +92,7 @@
           return;
         }
         let id_user = profilNavbar.getAttribute("id");
-        let favoris_icon = await DataMovie.getFavoris(id_user);
+        let favoris_icon = await DataProfile.getFavoris(id_user);
         if (!Array.isArray(favoris_icon)) {
           console.error("Les favoris n'ont pas pu être chargés.");
           return;
@@ -108,7 +108,7 @@
           return;
         }
         let id_user = profilNavbar.getAttribute("id");
-        let favoris_icon = await DataMovie.getFavoris(id_user);
+        let favoris_icon = await DataProfile.getFavoris(id_user);
         if (!Array.isArray(favoris_icon)) {
           console.error("Les favoris n'ont pas pu être chargés.");
           return;
@@ -152,7 +152,7 @@
       };
 
       V.renderAllprofil = async function () {
-        let dataProfil = await DataMovie.getprofil();
+        let dataProfil = await DataProfile.getprofil();
         dataProfil.forEach((profil) => {
           V.renderProfil_selector(profil);
         });
@@ -336,7 +336,7 @@
           const target = event.target.closest(".profil");
           if (target) {
             const profilId = target.getAttribute("id");
-            const profil = await DataMovie.getunprofil(profilId);
+            const profil = await DataProfile.getunprofil(profilId);
             V.renderNavBar(profil);
             V.renderCategorie_selector("C.handlerCategSelect()");
             V.renderAge_restriction();
@@ -358,11 +358,11 @@
             if (target.src.includes("star_notactive.svg")) {
               target.src = "../assets/images/star_active.svg";
               target.style.backgroundColor = "var(--color-white)";
-              DataMovie.addFavoris(id_user, id_carte);
+              DataProfile.addFavoris(id_user, id_carte);
             } else {
               target.src = "../assets/images/star_notactive.svg";
               target.style.backgroundColor = "var(--color-yellow)";
-              DataMovie.delFavoris(id_user, id_carte);
+              DataProfile.delFavoris(id_user, id_carte);
             }
           }
         });
@@ -379,11 +379,11 @@
             if (target.src.includes("star_notactive.svg")) {
               target.src = "../assets/images/star_active.svg";
               target.style.backgroundColor = "var(--color-white)";
-              DataMovie.addFavoris(id_user, id_carte);
+              DataProfile.addFavoris(id_user, id_carte);
             } else {
               target.src = "../assets/images/star_notactive.svg";
               target.style.backgroundColor = "var(--color-yellow)";
-              DataMovie.delFavoris(id_user, id_carte);
+              DataProfile.delFavoris(id_user, id_carte);
             }
           }
         });

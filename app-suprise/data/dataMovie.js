@@ -19,42 +19,6 @@ DataMovie.categorie = async function (category, age) {
     return data;
 }
 
-DataMovie.getprofil = async function () {
-    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=getprofil`);
-    let data = await answer.json();
-    return data;
-}
-
-DataMovie.getunprofil = async function (id) {
-    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=getunprofil&id=${id}`);
-    let data = await answer.json();
-    return data;
-}
-
-DataMovie.addFavoris = async function (id_user, id_film) {
-    let config = {
-        method: "POST",
-    };
-    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=addFavoris&id_user=${id_user}&id_film=${id_film}`, config);
-    let data = await answer.json();
-    return data;
-}
-
-DataMovie.delFavoris = async function (id_user, id_film) {
-    let config = {
-        method: "POST",
-    };
-    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=delFavoris&id_user=${id_user}&id_film=${id_film}`, config);
-    let data = await answer.json();
-    return data;
-}
-
-DataMovie.getFavoris = async function (id_user) {
-    let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=getFavoris&id_user=${id_user}`);
-    let data = await answer.json();
-    return data;
-}
-
 DataMovie.request_enAvant = async function (age) {
     let answer = await fetch(HOST_URL + `/SAE2.03-MMI-REICHMALO/server/script.php?todo=read_enAvant&age=${age}`);
     let data = await answer.json();
