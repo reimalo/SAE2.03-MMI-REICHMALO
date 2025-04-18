@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : jeu. 17 avr. 2025 à 14:34
+-- Généré le : ven. 18 avr. 2025 à 11:15
 -- Version du serveur : 10.11.11-MariaDB-0+deb12u1
 -- Version de PHP : 8.3.19
 
@@ -89,8 +89,8 @@ CREATE TABLE `Favoris` (
 INSERT INTO `Favoris` (`id`, `id_profil`, `id_film`) VALUES
 (81, 9, 37),
 (84, 9, 27),
-(151, 2, 41),
-(152, 2, 42);
+(156, 2, 38),
+(157, 2, 42);
 
 -- --------------------------------------------------------
 
@@ -209,7 +209,7 @@ ALTER TABLE `En_avant`
 -- AUTO_INCREMENT pour la table `Favoris`
 --
 ALTER TABLE `Favoris`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
 -- AUTO_INCREMENT pour la table `Movie`
